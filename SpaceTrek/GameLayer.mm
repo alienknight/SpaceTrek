@@ -160,7 +160,6 @@ bool isbullet;
     spaceStationBody->SetLinearVelocity(force);
     [self schedule:@selector(gameLogic:) interval:1.0];
     [self schedule:@selector(gameStoneLogic:) interval:3.0];
-    [self schedule:@selector(gameObstacleLogic:) interval:3.0];
 }
 -(void) treasureMovementLogic:(ccTime)dt
 {
@@ -389,6 +388,11 @@ bool isbullet;
                 b2Vec2 force = b2Vec2(-b->GetLinearVelocity().x, -b->GetLinearVelocity().y);
                 b->SetLinearVelocity(force);
             }
+            if(treasureData.tag==OBSTACLE_TAG)
+            {
+                b2Vec2 force = b2Vec2(-b->GetLinearVelocity().x, -b->GetLinearVelocity().y);
+                b->SetLinearVelocity(force);
+            }
         }
     }
     
@@ -403,10 +407,7 @@ bool isbullet;
 {
     [self addStone];
 }
--(void) gameObstacleLogic:(ccTime)dt
-{
-    [self addObstacle];
-}
+
 int GetRandom(int lowerbound, int upperbound){
     return lowerbound + arc4random() % ( upperbound - lowerbound + 1 );
 }
@@ -426,10 +427,14 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     GameObject *treasure;
     treasure = [[GameObject alloc] init];
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    int treasureIndex = arc4random()%6+2;
+    int treasureIndex = arc4random()%8+1;
     treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_%d.png", treasureIndex] ];
     if ( treasureIndex == 1 ){
         treasure.scale = 2;
+    }else
+    if ( treasureIndex == 8 ){
+        treasure.tag = OBSTACLE_TAG;
+        treasure.scale = 0.5;
     }else{
         treasure.scale = 1.5;
     }
@@ -469,68 +474,16 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     treasureShapeDef.filter.categoryBits = 0x2;
     treasureShapeDef.filter.maskBits = 0xFFFF-0x2;
    
+    if ( treasureIndex == 8 ){
+        treasureShapeDef.filter.categoryBits = 0x7;
+        treasureShapeDef.filter.maskBits = 0xFFFF-0x2-0x3-0x5;
+    }
     
     treasureBody->CreateFixture(&treasureShapeDef);
     
 
 }
--(void)addObstacle
-{
-    GameObject *obstacle;
-    obstacle = [[GameObject alloc] init];
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
-    obstacle = [GameObject spriteWithFile: [NSString stringWithFormat:@"obstacle.png"]];
-    /*
-    int treasureIndex = arc4random()%6+2;
-    obstacle = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_%d.png", treasureIndex] ];
-    if ( treasureIndex == 1 ){
-        obstacle.scale = 2;
-    }else{
-        obstacle.scale = 1.5;
-    }
-    */
-    
-    
-    obstacle.tag = OBSTACLE_TAG;
-    [obstacle setType:gameObjectObstacle];
-    int obstacleStartY = GetRandom( obstacle.contentSize.height/2, winSize.height - obstacle.contentSize.height/2 );
-    int obstacleDestinationY = GetRandomGaussian( obstacleStartY-winSize.height, obstacleStartY+winSize.height );
-    
-    obstacle.position = ccp(winSize.width - obstacle.contentSize.width/2, obstacleStartY);
-    
-    [self addChild:obstacle];
-    
-    b2BodyDef obstacleBodyDef;
-    obstacleBodyDef.type = b2_dynamicBody;
-    obstacleBodyDef.position.Set(obstacle.position.x/PTM_RATIO, obstacle.position.y/PTM_RATIO);
-    obstacleBodyDef.userData = obstacle;
-    
-    
-    
-    
-    obstacleBodyDef.userData = (__bridge_retained void*) obstacle;
-    
-    b2Body* obstacleBody = world->CreateBody(&obstacleBodyDef);
-    
-    b2Vec2 force = b2Vec2(-TRAVEL_SPEED*treasureSpeedMultiplier,0);
-    obstacleBody->SetLinearVelocity(force);
-    
-    b2CircleShape circle;
-    circle.m_radius = obstacle.contentSize.width/2/PTM_RATIO;
-    
-    b2FixtureDef obstacleShapeDef;
-    obstacleShapeDef.shape = &circle;
-    obstacleShapeDef.density = 3.0f;
-    obstacleShapeDef.friction = 0.0f;
-    obstacleShapeDef.restitution = 1.0f;
-    obstacleShapeDef.filter.categoryBits = 0x7;
-    obstacleShapeDef.filter.maskBits = 0xFFFF-0x2-0x3-0x5;
-    
-    
-    obstacleBody->CreateFixture(&obstacleShapeDef);
-    
-}
+
 -(void)addStone
 {
     GameObject *stone;
@@ -551,9 +504,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     stoneBodyDef.type = b2_dynamicBody;
     stoneBodyDef.position.Set(stone.position.x/PTM_RATIO, stone.position.y/PTM_RATIO);
     stoneBodyDef.userData = stone;
-    
-    
-    
     
     stoneBodyDef.userData = (__bridge_retained void*) stone;
     
@@ -576,6 +526,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     
     stoneBody->CreateFixture(&stoneShapeDef);
 }
+
 -(void) addBeginStone:(int) x yy:(int) y
 {
     GameObject *stone;
@@ -619,6 +570,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     
     stoneBody->CreateFixture(&stoneShapeDef);
 }
+
 -(void)treasureMoveFinished:(id)sender {
     
     CCSprite *sprite = (CCSprite *)sender;
@@ -650,9 +602,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     spaceStationBodyDef.type = b2_dynamicBody;
     spaceStationBodyDef.position.Set(spaceStation.position.x/PTM_RATIO, spaceStation.position.y/PTM_RATIO);
     spaceStationBodyDef.userData = spaceStation;
-    
-    
-    
     
     spaceStationBodyDef.userData = (__bridge_retained void*) spaceStation;
     
@@ -698,7 +647,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         [self unschedule:@selector(playerMoveFinished:)];
         [self unschedule:@selector(gameLogic:)];
         [self unschedule:@selector(gameStoneLogic:)];
-         [self unschedule:@selector(gameObstacleLogic:)];
         [self unschedule:@selector(addTreasure:)];
         [self treasureBack];
         isPlayerMoveBack=false;
