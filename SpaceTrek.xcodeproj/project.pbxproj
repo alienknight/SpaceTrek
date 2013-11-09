@@ -257,6 +257,7 @@
 		F1CA5DEE1813DD2700A6BE77 /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1CA5DED1813DD2700A6BE77 /* GameOverScene.mm */; };
 		F1CA5DF11813DEA900A6BE77 /* GameOverLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1CA5DF01813DEA900A6BE77 /* GameOverLayer.mm */; };
 		F1CC4156182AC5760026C4E2 /* treasure_type_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F1CC4155182AC5760026C4E2 /* treasure_type_1.png */; };
+		F1CC4159182AF4C70026C4E2 /* obstacle.png in Resources */ = {isa = PBXBuildFile; fileRef = F1CC4158182AF4C70026C4E2 /* obstacle.png */; };
 		F1D9FE0E1820CA1900A27113 /* TOOLBAR_SHIELD_2TIMES.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D9FE0D1820CA1900A27113 /* TOOLBAR_SHIELD_2TIMES.png */; };
 		F1D9FE101820D27500A27113 /* TOOLBAR_Magnet.png in Resources */ = {isa = PBXBuildFile; fileRef = F1D9FE0F1820D27500A27113 /* TOOLBAR_Magnet.png */; };
 		F1F5F1221821B2D60084BB33 /* Stone_type_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F1F5F11C1821B2D60084BB33 /* Stone_type_1.png */; };
@@ -736,6 +737,7 @@
 		F1CA5DF01813DEA900A6BE77 /* GameOverLayer.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameOverLayer.mm; sourceTree = "<group>"; };
 		F1CC4155182AC5760026C4E2 /* treasure_type_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = treasure_type_1.png; sourceTree = "<group>"; };
 		F1CC4157182AD7670026C4E2 /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		F1CC4158182AF4C70026C4E2 /* obstacle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obstacle.png; sourceTree = "<group>"; };
 		F1D9FE0D1820CA1900A27113 /* TOOLBAR_SHIELD_2TIMES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TOOLBAR_SHIELD_2TIMES.png; sourceTree = "<group>"; };
 		F1D9FE0F1820D27500A27113 /* TOOLBAR_Magnet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TOOLBAR_Magnet.png; sourceTree = "<group>"; };
 		F1F5F11C1821B2D60084BB33 /* Stone_type_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stone_type_1.png; sourceTree = "<group>"; };
@@ -1507,6 +1509,7 @@
 		F17B976617FCEC8800BD6670 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				F1CC4158182AF4C70026C4E2 /* obstacle.png */,
 				F1CC4155182AC5760026C4E2 /* treasure_type_1.png */,
 				F1640E80182A371100AADE1E /* STORE_Invincible15s.png */,
 				F1640E81182A371100AADE1E /* STORE_Magnet.png */,
@@ -1618,6 +1621,7 @@
 				F17B951F17FCBB7A00BD6670 /* Icon-Small-50.png in Resources */,
 				75E2846718021E810003E344 /* scroll.png in Resources */,
 				757BA8571814B9E6006645AA /* runway.png in Resources */,
+				F1CC4159182AF4C70026C4E2 /* obstacle.png in Resources */,
 				F14E4E7A18130ED0005D8190 /* MENU.png in Resources */,
 				757BA84F1814A7D4006645AA /* LaunchSong.mp3 in Resources */,
 				757BA84B1814A559006645AA /* loadingBackground.png in Resources */,

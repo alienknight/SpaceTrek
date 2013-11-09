@@ -60,15 +60,17 @@
         // create a blank layer for page 1
         CCLayer *pageOne = [[CCLayer alloc] init];
         // create an image button for page 1
-        CCMenuItem *button1 = [CCMenuItemImage itemWithNormalImage:@"Default-Landscape~ipad.png" selectedImage:@"Default-Landscape~ipad.png" target:self selector:@selector(buttonAction1:)];
+        CCMenuItem *button1 = [CCMenuItemImage itemWithNormalImage:@"Default@2x.png" selectedImage:@"Default@2x.png" target:self selector:@selector(buttonAction1:)];
         button1.scale = 0.8;
+        button1.rotation = 90;
         CCMenu *Menu1 = [CCMenu menuWithItems:button1, nil];
         Menu1.position=ccp(screenSize.width/2, screenSize.height/2);
         [Menu1 alignItemsHorizontally];
         [pageOne addChild:Menu1];
         // create a label for page 1
         CCLabelTTF *label1 = [CCLabelTTF labelWithString:@"Galaxy" fontName:@"arial" fontSize:44];
-        label1.position =  ccp( screenSize.width /2 , 50 );
+        label1.rotation = 90;
+        label1.position =  ccp( screenSize.width /4 , screenSize.height/2 );
         // add label to page 1 layer
         [pageOne addChild:label1];
         
@@ -78,15 +80,17 @@
         // create a blank layer for page 2
         CCLayer *pageTwo = [[CCLayer alloc] init];
         // create an image button for page 2
-        CCMenuItem *button2 = [CCMenuItemImage itemWithNormalImage:@"Default-Landscape~ipad.png" selectedImage:@"Default-Landscape~ipad.png" target:self selector:@selector(buttonAction2:)];
+        CCMenuItem *button2 = [CCMenuItemImage itemWithNormalImage:@"Default@2x.png" selectedImage:@"Default@2x.png" target:self selector:@selector(buttonAction2:)];
         button2.scale = 0.8;
+        button2.rotation = 90;
         CCMenu *Menu2 = [CCMenu menuWithItems:button2, nil];
         Menu2.position=ccp(screenSize.width/2, screenSize.height/2);
         [Menu2 alignItemsHorizontally];
         [pageTwo addChild:Menu2];
         // create a label for page 2
         CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Andromeda Galaxy" fontName:@"arial" fontSize:44];
-        label2.position =  ccp( screenSize.width /2 , 50 );
+        label2.rotation = 90;
+        label2.position =  ccp( screenSize.width /4 , screenSize.height/2 );
         // add label to page 2 layer
         [pageTwo addChild:label2];
         /////////////////////////////////////////////////
@@ -95,15 +99,17 @@
         
         CCLayer *pageThree = [[CCLayer alloc] init];
         // create an image button for page 3
-        CCMenuItem *button3 = [CCMenuItemImage itemWithNormalImage:@"Default-Landscape~ipad.png" selectedImage:@"Default-Landscape~ipad.png" target:self selector:@selector(buttonAction3:)];
+        CCMenuItem *button3 = [CCMenuItemImage itemWithNormalImage:@"Default@2x.png" selectedImage:@"Default@2x.png" target:self selector:@selector(buttonAction3:)];
         button3.scale = 0.8;
+        button3.rotation = 90;
         CCMenu *Menu3 = [CCMenu menuWithItems:button3, nil];
         Menu3.position=ccp(screenSize.width/2, screenSize.height/2);
         [Menu3 alignItemsHorizontally];
         [pageThree addChild:Menu3];
         // create a label for page 3
         CCLabelTTF *label3 = [CCLabelTTF labelWithString:@"Alien Galaxy" fontName:@"arial" fontSize:44];
-        label3.position =  ccp( screenSize.width /2 , 50 );
+        label3.rotation = 90;
+        label3.position =  ccp( screenSize.width /4 , screenSize.height/2 );
         // add label to page 3 layer
         [pageThree addChild:label3];
         

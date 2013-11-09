@@ -48,10 +48,13 @@ std::set<int> purcharsedProperty;
     
     property3 = [CCMenuItemImage itemWithNormalImage:@"STORE_Magnet.png" selectedImage:@"STORE_Magnet.png" target:self selector:@selector(storePropertySelected3)];
     property3.tag = STORE_PROPERTY_TYPE_3_TAG;
+   
+    property4 = [CCMenuItemImage itemWithNormalImage:@"STORE_Magnet.png" selectedImage:@"STORE_Magnet.png" target:self selector:@selector(storePropertySelected4)];
+    property4.tag = STORE_PROPERTY_TYPE_4_TAG;
     
-    PropertyMenu = [CCMenu menuWithItems:property1, property2, property3, nil];
+    PropertyMenu = [CCMenu menuWithItems:property1, property2, property3,property4, nil];
     [PropertyMenu setAnchorPoint: ccp(0.0f, 1.0f)];
-    [PropertyMenu setPosition:ccp(584, 653)];
+    [PropertyMenu setPosition:ccp(504, 653)];
     
     [PropertyMenu alignItemsHorizontallyWithPadding:45.0f];
     [self addChild:PropertyMenu z:3];
@@ -65,19 +68,27 @@ std::set<int> purcharsedProperty;
 -(void) storePropertySelected1
 {
     property1.visible = false;
+//    [self removeChild:property1];
     purcharsedProperty.insert(1);
 }
 -(void) storePropertySelected2
 {
     property2.visible = false;
+//    [self removeChild:property2];
     purcharsedProperty.insert(2);
 }
 -(void) storePropertySelected3
 {
     property3.visible = false;
+//    [self removeChild:property3];
     purcharsedProperty.insert(3);
 }
-
+-(void) storePropertySelected4
+{
+    property4.visible = false;
+//    [self removeChild:property4];
+    purcharsedProperty.insert(4);
+}
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

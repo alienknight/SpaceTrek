@@ -29,6 +29,15 @@ void ContactListener::BeginContact(b2Contact *contact) {
         GameObject *spriteB = (__bridge GameObject *) bodyB->GetUserData();
         
         
+        if(spriteA.tag == BULLET_TAG || spriteB.tag == BULLET_TAG)
+        {
+            GameObject *bulletSprite=(spriteA.tag==BULLET_TAG)?spriteA:spriteB;
+            GameObject* obstacleSprite =(spriteA.tag==OBSTACLE_TAG)?spriteA:spriteB;
+            obstacleSprite.tag = OBSTACLE_DESTROY_TAG;
+            bulletSprite.tag = BULLET_DESTROY_TAG;
+            return;
+        }
+        
         if(spriteA.type>spriteB.type)
         {
             std::swap(spriteA, spriteB);
@@ -44,8 +53,6 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 CCScene* scene = [[CCDirector sharedDirector] runningScene];
                 GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
                 
-//                BackgroundLayer* backgroundLayer = (BackgroundLayer*)[scene getChildByTag:BACKGROUND_LAYER_TAG];
-//                [backgroundLayer reverseMap];
                 
                 if(player.numOfAffordCollsion > player.numOfCollsion)
                 {
@@ -65,6 +72,32 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 }
                 
             }
+            else if(spriteB.type==gameObjectObstacle)
+            {
+                GameObject *treasuerSprite=(spriteA.type==gameObjectPlayer)?spriteB:spriteA;
+                GameObject* playerSprite =(spriteA.type==gameObjectPlayer)?spriteA:spriteB;
+                Player* player = (Player*)playerSprite;
+                CCScene* scene = [[CCDirector sharedDirector] runningScene];
+                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+                
+                
+                if(player.numOfAffordCollsion > player.numOfCollsion)
+                {
+                    treasuerSprite.tag = OBSTACLE_DESTROY_TAG;
+                    player.numOfCollsion++;
+                    player.scale = 1.0;
+                }
+                else
+                {
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"CrashSong.mp3"];
+                    
+                    [layer playerBack];
+                    [layer ChangeGoBackSound];
+                    
+                    treasuerSprite.tag = OBSTACLE_DESTROY_TAG;
+                    [playerSprite setType:gameObjectCollector];
+                }
+            }
         }
         else if(spriteA.type==gameObjectCollector)
         {
@@ -80,7 +113,6 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 
                 treasuerSprite.tag = TREASURE_DESTROY_TAG;
             }
-
         }
     }
 }

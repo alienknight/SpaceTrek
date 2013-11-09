@@ -75,7 +75,7 @@ int hudLevel;
             case 4:
                 property4 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Magnet.png" selectedImage:@"TOOLBAR_Magnet.png" target:self selector:@selector(propertySelected4)];
                 property4.tag = TREASURE_PROPERTY_TYPE_4_TAG;
-                [PropertyMenu addChild:property3];
+                [PropertyMenu addChild:property4];
                 break;
             default:
                 break;
