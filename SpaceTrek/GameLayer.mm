@@ -203,7 +203,7 @@ bool isbullet;
                 world->DestroyBody(b);
                 continue;
             }
-            if(treasureData.tag == TREASURE_DESTROY_TAG)
+            if(treasureData.tag == TREASURE_DESTROY_TAG || treasureData.tag == OBSTACLE_COLLECT_TAG)
             {
                 //[self removeChild:treasureData cleanup:YES];
                 //world->DestroyBody(b);
@@ -284,6 +284,7 @@ bool isbullet;
             if(treasureData.tag!=SPACESTATION_TAG && f->TestPoint(position)&&isCollect)
             {
                 CCLOG(@"here 0");
+               
                 self.score += 10;
                 treasureData.tag = TREASURE_COLLECT_TAG;
                 
@@ -308,7 +309,7 @@ bool isbullet;
         if (b->GetUserData() != NULL) {
             CCSprite *treasureData = (CCSprite *)b->GetUserData();
             
-            if(treasureData.tag == STONE_TAG )
+            if(treasureData.tag == STONE_TAG)
             {
                 [self removeChild:treasureData cleanup:YES];
                 world->DestroyBody(b);
@@ -363,7 +364,6 @@ bool isbullet;
                                         b->GetPosition().y*PTM_RATIO);
                 treasureData.rotation = 0 * CC_RADIANS_TO_DEGREES(b->GetAngle());
             }
-            
             
         }
     }
@@ -451,12 +451,10 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         treasure.scale = 2;
     }else
     if ( treasureIndex == 8 ){
-        treasure.tag = OBSTACLE_TAG;
         treasure.scale = 0.5;
     }else{
         treasure.scale = 1.5;
     }
-    
     treasure.tag = TREASURE_TAG;
     [treasure setType:gameObjectTreasure1];
     int treasureStartY = GetRandom( treasure.contentSize.height/2, winSize.height - treasure.contentSize.height/2 );
@@ -492,11 +490,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     treasureShapeDef.filter.categoryBits = 0x2;
     treasureShapeDef.filter.maskBits = 0xFFFF-0x2;
    
-    if ( treasureIndex == 8 ){
-        treasureShapeDef.filter.categoryBits = 0x7;
-        treasureShapeDef.filter.maskBits = 0xFFFF-0x2-0x3-0x5;
-    }
-    
     treasureBody->CreateFixture(&treasureShapeDef);
     
 
@@ -856,7 +849,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     bulletShapeDef.friction = 0.2f;
     bulletShapeDef.restitution = 1.0f;
     bulletShapeDef.filter.categoryBits = 0x6;
-    bulletShapeDef.filter.maskBits = 0xFFFF-0x2-0x1-0x5-0x3;
+    bulletShapeDef.filter.maskBits = 0xFFFF-0x1-0x5-0x3;
     
     
     bulletBody->CreateFixture(&bulletShapeDef);

@@ -32,7 +32,7 @@ void ContactListener::BeginContact(b2Contact *contact) {
         if(spriteA.tag == BULLET_TAG || spriteB.tag == BULLET_TAG)
         {
             GameObject *bulletSprite=(spriteA.tag==BULLET_TAG)?spriteA:spriteB;
-            GameObject* obstacleSprite =(spriteA.tag==OBSTACLE_TAG)?spriteA:spriteB;
+            GameObject* obstacleSprite =(spriteA.tag==TREASURE_TAG)?spriteA:spriteB;
             obstacleSprite.tag = OBSTACLE_DESTROY_TAG;
             bulletSprite.tag = BULLET_DESTROY_TAG;
             return;
@@ -107,17 +107,15 @@ void ContactListener::BeginContact(b2Contact *contact) {
         }
         else if(spriteA.type==gameObjectCollector)
         {
-            if(spriteB.type==gameObjectTreasure1)
+            if(spriteB.type==gameObjectTreasure1 || spriteB.type == gameObjectObstacle)
             {
                 GameObject *treasuerSprite=(spriteA.type==gameObjectCollector)?spriteB:spriteA;
                 
-                CCScene* scene = [[CCDirector sharedDirector] runningScene];
-                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+                if(spriteB.type == gameObjectTreasure1)
+                    treasuerSprite.tag = TREASURE_DESTROY_TAG;
+                if(spriteB.type == gameObjectObstacle)
+                    treasuerSprite.tag = OBSTACLE_COLLECT_TAG;
                 
-                
-                
-                
-                treasuerSprite.tag = TREASURE_DESTROY_TAG;
             }
         }
     }
