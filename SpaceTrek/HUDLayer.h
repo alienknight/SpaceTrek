@@ -17,6 +17,8 @@
     GameLayer *gameLayer;
     CCMenuItemImage* property1, *property2, *property3, *property4, *property5, *propertyNull;
     CCMenu *PropertyMenu;
+    CCMenuItemSprite *pauseButton;
+    CCMenu *pauseMenu;
 }
 -(void) updateDistanceCounter:(int)amount;
 

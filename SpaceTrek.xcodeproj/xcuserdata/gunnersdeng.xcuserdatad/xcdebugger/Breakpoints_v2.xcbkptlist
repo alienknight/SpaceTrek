@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "405984800.22893"
+            timestampString = "405991477.467486"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "-treasureCollectMovementLogic:"
             landmarkType = "5">
          </BreakpointContent>

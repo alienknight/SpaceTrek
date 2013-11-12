@@ -81,18 +81,6 @@ bool isbullet;
         isReach=false;
         
         [self schedule:@selector(treasureMovementLogic:)];
-
-        
-        pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelected)];
-        pauseButton.scale = 0.8;
-        pauseButton.rotation = 90;
-        
-        pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
-        pauseMenu.position=ccp(980, 700);
-        
-        [pauseMenu alignItemsVerticallyWithPadding:10.0f];
-        [self addChild:pauseMenu z:1];
-        
         
         hudLayer = nil;
         [self schedule:@selector(update:)];
@@ -285,7 +273,8 @@ bool isbullet;
             {
                 CCLOG(@"here 0");
                
-                self.score += 10;
+                GameObject* treasureObj = (__bridge GameObject *)treasureData;
+                self.score += treasureObj.score;
                 treasureData.tag = TREASURE_COLLECT_TAG;
                 
                 treasureNumber--;
@@ -449,11 +438,14 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_%d.png", treasureIndex] ];
     if ( treasureIndex == 1 ){
         treasure.scale = 2;
+        [treasure setScore:10];
     }else
     if ( treasureIndex == 8 ){
         treasure.scale = 0.5;
+        [treasure setScore:-10];
     }else{
         treasure.scale = 1.5;
+        [treasure setScore:10];
     }
     treasure.tag = TREASURE_TAG;
     [treasure setType:gameObjectTreasure1];

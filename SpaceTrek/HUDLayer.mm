@@ -38,8 +38,25 @@ int hudLevel;
         
         [self addChild:statusBar z:2];
         [statusBar addChild:distanceLabel z:30];
+     
         
-    }
+        
+        CCSprite * aa= [CCSprite spriteWithFile:@"background-shadow.png"];
+        [aa setAnchorPoint: ccp(0,0)];
+        [aa setPosition: ccp(0, 0)];
+        [self addChild:aa z:1];
+        
+        pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelected)];
+        pauseButton.scale = 0.8;
+        pauseButton.rotation = 90;
+        
+        pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
+        pauseMenu.position=ccp(980, 700);
+        
+        [pauseMenu alignItemsVerticallyWithPadding:10.0f];
+        [self addChild:pauseMenu z:2];
+
+   }
     return self;
 }
 
@@ -89,7 +106,7 @@ int hudLevel;
     }
     
     for (int i=0; i<5-num; i++){
-        propertyNull = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_SHIELD_2TIMES.png" selectedImage:@"TOOLBAR_SHIELD_2TIMES.png" target:self selector:@selector(propertySelectedNull)];
+        propertyNull = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_empty.png" selectedImage:@"TOOLBAR_empty.png" target:self selector:@selector(propertySelectedNull)];
         propertyNull.tag = TREASURE_PROPERTY_TYPE_4_NULL;
         [PropertyMenu addChild:propertyNull];
     }
@@ -150,6 +167,13 @@ int hudLevel;
 
 -(void) propertySelectedNull
 {
+}
+
+-(void) pauseButtonSelected
+{
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+    [layer pauseButtonSelected];
 }
 
 @end

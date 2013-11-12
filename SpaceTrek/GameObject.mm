@@ -12,12 +12,14 @@
 @implementation GameObject
 
 @synthesize type;
+@synthesize score;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         type = gameObjectGeneral;
+        score = 0;
     }
     
     return self;

@@ -56,7 +56,7 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 
                 if(player.numOfAffordCollsion > 0)
                 {
-                    treasuerSprite.tag = TREASURE_PROPERTY_TYPE_1_TAG;
+                    treasuerSprite.tag = TREASURE_DESTROY_TAG;
                     player.numOfAffordCollsion--;
                     [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
                     player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
