@@ -53,7 +53,7 @@
     
     SimpleAudioEngine * backgroundAmbience;
     
-    bool gamePart2;
+    bool gamePart1, gamePart2;
     
     ALuint firstBackgroundMusic;
     ALuint secondBackgroundMusic;

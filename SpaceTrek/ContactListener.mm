@@ -54,11 +54,14 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
                 
                 
-                if(player.numOfAffordCollsion > player.numOfCollsion)
+                if(player.numOfAffordCollsion > 0)
                 {
                     treasuerSprite.tag = TREASURE_PROPERTY_TYPE_1_TAG;
-                    player.numOfCollsion++;
-                    player.scale = 1.0;
+                    player.numOfAffordCollsion--;
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
+                    player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+                    if ( player.numOfAffordCollsion == 0 )
+                        player.scale = 1.0;
                 }
                 else
                 {
@@ -81,11 +84,14 @@ void ContactListener::BeginContact(b2Contact *contact) {
                 GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
                 
                 
-                if(player.numOfAffordCollsion > player.numOfCollsion)
+                if(player.numOfAffordCollsion > 0)
                 {
                     treasuerSprite.tag = OBSTACLE_DESTROY_TAG;
-                    player.numOfCollsion++;
-                    player.scale = 1.0;
+                    player.numOfAffordCollsion--;
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
+                    player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+                    if ( player.numOfAffordCollsion == 0 )
+                        player.scale = 1.0;
                 }
                 else
                 {

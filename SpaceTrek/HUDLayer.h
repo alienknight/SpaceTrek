@@ -15,7 +15,7 @@
     CCLabelTTF *distanceLabel;
     CCSprite *statusBar;
     GameLayer *gameLayer;
-    CCMenuItemImage* property1, *property2, *property3, *property4, *property5;
+    CCMenuItemImage* property1, *property2, *property3, *property4, *property5, *propertyNull;
     CCMenu *PropertyMenu;
 }
 -(void) updateDistanceCounter:(int)amount;

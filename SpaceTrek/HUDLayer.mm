@@ -53,6 +53,7 @@ int hudLevel;
 {
     PropertyMenu = [CCMenu menuWithItems: nil];
     std::set<int>::iterator it;
+    int num = 0;
     for (it=purcharsedProperty.begin(); it!=purcharsedProperty.end(); ++it)
     {
         
@@ -61,21 +62,25 @@ int hudLevel;
                 property1 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_SHIELD_2TIMES.png" selectedImage:@"TOOLBAR_SHIELD_2TIMES.png" target:self selector:@selector(propertySelected1)];
                 property1.tag = TREASURE_PROPERTY_TYPE_1_TAG;
                 [PropertyMenu addChild:property1];
+                num++;
                 break;
             case 2:
                 property2 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Invincible15s.png" selectedImage:@"TOOLBAR_Invincible15s.png" target:self selector:@selector(propertySelected2)];
                 property2.tag = TREASURE_PROPERTY_TYPE_2_TAG;
                 [PropertyMenu addChild:property2];
+                num++;
                 break;
             case 3:
                 property3 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Magnet.png" selectedImage:@"TOOLBAR_Magnet.png" target:self selector:@selector(propertySelected3)];
                 property3.tag = TREASURE_PROPERTY_TYPE_3_TAG;
                 [PropertyMenu addChild:property3];
+                num++;
                 break;
             case 4:
                 property4 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Magnet.png" selectedImage:@"TOOLBAR_Magnet.png" target:self selector:@selector(propertySelected4)];
                 property4.tag = TREASURE_PROPERTY_TYPE_4_TAG;
                 [PropertyMenu addChild:property4];
+                num++;
                 break;
             default:
                 break;
@@ -83,12 +88,19 @@ int hudLevel;
         
     }
     
+    for (int i=0; i<5-num; i++){
+        propertyNull = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_SHIELD_2TIMES.png" selectedImage:@"TOOLBAR_SHIELD_2TIMES.png" target:self selector:@selector(propertySelectedNull)];
+        propertyNull.tag = TREASURE_PROPERTY_TYPE_4_NULL;
+        [PropertyMenu addChild:propertyNull];
+    }
     
+    //[PropertyMenu setAnchorPoint: ccp(0.0f, 1.0f)];
+    //[PropertyMenu setPosition:ccp(46, 443)];
     
-    [PropertyMenu setAnchorPoint: ccp(0.0f, 1.0f)];
-    [PropertyMenu setPosition:ccp(46, 443)];
+    //[PropertyMenu setAnchorPoint: ccp(-10.0f, 10.0f)];
+    [PropertyMenu setPosition:ccp(46, 385)];
     
-    [PropertyMenu alignItemsVerticallyWithPadding:9.0f];
+    [PropertyMenu alignItemsVerticallyWithPadding:8.5f];
     [self addChild:PropertyMenu z:3];
 }
 
@@ -134,6 +146,10 @@ int hudLevel;
         [PropertyMenu removeChild:property4];
         purcharsedProperty.erase(4);
     }
+}
+
+-(void) propertySelectedNull
+{
 }
 
 @end

@@ -39,6 +39,7 @@ bool isbullet;
         collectedTreasure.clear();
         
         treasureSpeedMultiplier = 1;
+        gamePart1 = true;
         gamePart2 = false;
         isPlayerMoveBack = false;
         isStationMoveBack = false;
@@ -267,7 +268,9 @@ bool isbullet;
 
     if(isbullet)
     {
-        [self addBullet];
+        if ( gamePart1 ){
+            [self addBullet];
+        }
         return;
     }
     UITouch *touch = [touches anyObject];
@@ -301,6 +304,20 @@ bool isbullet;
     
     [self unscheduleAllSelectors];
 
+    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            CCSprite *treasureData = (CCSprite *)b->GetUserData();
+            
+            if(treasureData.tag == STONE_TAG )
+            {
+                [self removeChild:treasureData cleanup:YES];
+                world->DestroyBody(b);
+                continue;
+            }
+        }
+    }
+    
+    
     b2Vec2 playPosition = player->playerBody->GetPosition();
     treasureNumber = collectedTreasure.size();
     
@@ -364,6 +381,7 @@ bool isbullet;
 {
     isPlayerMoveBack = true;
     isStationMoveBack = true;
+    gamePart1 = false;
     gamePart2 = true;
 }
 -(void) treasureBack
@@ -692,13 +710,16 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
 {
     if(propertyTag == TREASURE_PROPERTY_TYPE_1_TAG)
     {
-
+        if ( !gamePart1 ){
+            return false;
+        }
         player.numOfAffordCollsion += 1;
+        numOfAffordCollsionTEMP++;
         player.scale = 1.5;
     }
     else if (propertyTag == TREASURE_PROPERTY_TYPE_2_TAG)
     {
-        if ( gamePart2 ){
+        if ( !gamePart1 ){
             return false;
         }
         [self unschedule:@selector(gameLogic:)];
@@ -731,6 +752,9 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     }
     else if(propertyTag == TREASURE_PROPERTY_TYPE_4_TAG)
     {
+        if ( !gamePart1 ){
+            return false;
+        }
         isbullet = true;
         [self schedule:@selector(endBullet:) interval:15];
     }
