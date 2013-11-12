@@ -694,7 +694,8 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         CCScene* scene = [[CCDirector sharedDirector] runningScene];
         hudLayer = (HUDLayer*)[scene getChildByTag:HUD_LAYER_TAG];
     }
-    distance += dt*100;
+    if(gamePart1)
+        distance += dt*100;
     [hudLayer updateDistanceCounter:distance];
     [self updateShip];
 }
