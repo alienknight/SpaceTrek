@@ -659,7 +659,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     {
         b2Vec2 position1(player.position.x/PTM_RATIO, newY/PTM_RATIO);
         player->playerBody->SetTransform(position1, 0.0);
-        
+        [hudLayer setShadowPosition:player.position.x yy:newY];
     }
 }
 
