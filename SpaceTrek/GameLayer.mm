@@ -808,7 +808,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     GameObject *bullet;
     bullet = [[GameObject alloc] init];
     
-    bullet = [GameObject spriteWithFile: [NSString stringWithFormat:@"Stone_type_2.png"]];
+    bullet = [GameObject spriteWithFile: [NSString stringWithFormat:@"Bullet.png"]];
     
     
     bullet.tag = BULLET_TAG;

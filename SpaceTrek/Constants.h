@@ -26,6 +26,7 @@
 #define GAME_LAYER_TAG 2
 #define PAUSE_LAYER_TAG 3
 #define STORE_LAYER_TAG 4
+#define Help_LAYER_TAG 5
 
 
 

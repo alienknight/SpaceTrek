@@ -49,7 +49,7 @@ std::set<int> purcharsedProperty;
     property3 = [CCMenuItemImage itemWithNormalImage:@"STORE_Magnet.png" selectedImage:@"STORE_Magnet.png" target:self selector:@selector(storePropertySelected3)];
     property3.tag = STORE_PROPERTY_TYPE_3_TAG;
    
-    property4 = [CCMenuItemImage itemWithNormalImage:@"STORE_Magnet.png" selectedImage:@"STORE_Magnet.png" target:self selector:@selector(storePropertySelected4)];
+    property4 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected4)];
     property4.tag = STORE_PROPERTY_TYPE_4_TAG;
     
     PropertyMenu = [CCMenu menuWithItems:property1, property2, property3,property4, nil];

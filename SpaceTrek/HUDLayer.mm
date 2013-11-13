@@ -46,7 +46,7 @@ int hudLevel;
         [aa setPosition: ccp(0, 0)];
         [self addChild:aa z:1];
         
-        pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelected)];
+        pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelectedCur)];
         pauseButton.scale = 0.8;
         pauseButton.rotation = 90;
         
@@ -94,7 +94,7 @@ int hudLevel;
                 num++;
                 break;
             case 4:
-                property4 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Magnet.png" selectedImage:@"TOOLBAR_Magnet.png" target:self selector:@selector(propertySelected4)];
+                property4 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Bullet.png" selectedImage:@"TOOLBAR_Bullet.png" target:self selector:@selector(propertySelected4)];
                 property4.tag = TREASURE_PROPERTY_TYPE_4_TAG;
                 [PropertyMenu addChild:property4];
                 num++;
@@ -169,7 +169,7 @@ int hudLevel;
 {
 }
 
--(void) pauseButtonSelected
+-(void) pauseButtonSelectedCur
 {
     CCScene* scene = [[CCDirector sharedDirector] runningScene];
     GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
