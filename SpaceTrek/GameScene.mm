@@ -8,6 +8,8 @@
 
 #import "GameScene.h"
 #import "GameLayer.h"
+#import "GameLayer2.h"
+#import "GameLayer3.h"
 #import "BackgroundLayer.h"
 #import "PauseLayer.h"
 #import "Constants.h"
@@ -78,7 +80,7 @@ static GameScene* instanceOfGameScene;
         }
         case GAME_STATE_TWO:
         {
-            BackgroundLayer *backgroundLayer = [[BackgroundLayer alloc] initWithLevel: 1];
+            BackgroundLayer *backgroundLayer = [[BackgroundLayer alloc] initWithLevel: 2];
             [scene addChild:backgroundLayer z:-1 tag:BACKGROUND_LAYER_TAG];
             
             HUDLayer *hudLayer = [[HUDLayer node] init];
@@ -86,7 +88,7 @@ static GameScene* instanceOfGameScene;
             [scene addChild: hudLayer z:3 tag:HUD_LAYER_TAG];
             
             // 'layer' is an autorelease object.
-            GameLayer *gameLayer = [GameLayer node];
+            GameLayer2 *gameLayer = [GameLayer2 node];
             // add layer as a child to scene
             [scene addChild: gameLayer z:1];
             
@@ -95,7 +97,7 @@ static GameScene* instanceOfGameScene;
         }
         case GAME_STATE_THREE:
         {
-            BackgroundLayer *backgroundLayer = [[BackgroundLayer alloc] initWithLevel: 1];
+            BackgroundLayer *backgroundLayer = [[BackgroundLayer alloc] initWithLevel: 3];
             [scene addChild:backgroundLayer z:-1 tag:BACKGROUND_LAYER_TAG];
             
             HUDLayer *hudLayer = [[HUDLayer node] init];
@@ -103,7 +105,7 @@ static GameScene* instanceOfGameScene;
             [scene addChild: hudLayer z:3 tag:HUD_LAYER_TAG];
             
             // 'layer' is an autorelease object.
-            GameLayer *gameLayer = [GameLayer node];
+            GameLayer3 *gameLayer = [GameLayer3 node];
             // add layer as a child to scene
             [scene addChild: gameLayer z:1];
             

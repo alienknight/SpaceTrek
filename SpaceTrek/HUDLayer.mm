@@ -41,10 +41,10 @@ int hudLevel;
      
         
         
-        CCSprite * aa= [CCSprite spriteWithFile:@"background-shadow.png"];
-        [aa setAnchorPoint: ccp(0,0)];
-        [aa setPosition: ccp(0, 0)];
-        [self addChild:aa z:1];
+        shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
+        [shadow setAnchorPoint: ccp(0,0.5)];
+        [shadow setPosition: ccp(0, winSize.height/2)];
+        [self addChild:shadow z:1];
         
         pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelectedCur)];
         pauseButton.scale = 0.8;
@@ -59,7 +59,11 @@ int hudLevel;
    }
     return self;
 }
-
+-(void) setShadowPosition: (int) x yy:(int) y
+{
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    [shadow setPosition: ccp(0, y)];
+}
 -(void) updateDistanceCounter:(int)amount
 {
     NSString *amounts = [NSString stringWithFormat:@"%d", (int)amount];

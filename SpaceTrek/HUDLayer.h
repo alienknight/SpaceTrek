@@ -19,8 +19,12 @@
     CCMenu *PropertyMenu;
     CCMenuItemSprite *pauseButton;
     CCMenu *pauseMenu;
+    
+    CCSprite * shadow;
 }
 -(void) updateDistanceCounter:(int)amount;
+
+-(void) setShadowPosition:(int) x yy:(int) y;
 
 +(HUDLayer*) getHUDLayer;
 

@@ -24,7 +24,7 @@
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         
-        HelpBackground= [CCSprite spriteWithFile:@"Help_Background.png"];
+        HelpBackground= [CCSprite spriteWithFile:@"help_Background.png"];
         HelpBackground.position = ccp(winSize.width/2 , winSize.height/2);
         
         [self addChild:HelpBackground z:1];
