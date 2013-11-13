@@ -280,7 +280,7 @@ bool isbullet_2;
                 treasureNumber--;
                 if ( treasureNumber==0 ){
                     [self unscheduleAllSelectors];
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_ONE Score:self.score Distance:distance]]];
+                    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_TWO Score:self.score Distance:distance]]];
                 }
             }
             
@@ -363,7 +363,7 @@ bool isbullet_2;
 -(void)JumpToGameOverScene:(ccTime)delta
 {
     [self unscheduleAllSelectors];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_ONE Score:self.score Distance:distance]]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_TWO Score:self.score Distance:distance]]];
 }
 
 -(void) playerBack
@@ -492,8 +492,8 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
     GameObject *stone;
     stone = [[GameObject alloc] init];
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    int stoneIndex = arc4random()%6+1;
-    stone = [GameObject spriteWithFile: [NSString stringWithFormat:@"Stone_type_%d.png", stoneIndex] ];
+    int stoneIndex = arc4random()%2+1;
+    stone = [GameObject spriteWithFile: [NSString stringWithFormat:@"fireball_%d.png", stoneIndex] ];
     
     stone.tag = STONE_TAG;
     [stone setType:gameObjectStone];
@@ -535,7 +535,7 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
     GameObject *stone;
     stone = [[GameObject alloc] init];
     
-    stone = [GameObject spriteWithFile: [NSString stringWithFormat:@"Stone_type_2.png"]];
+    stone = [GameObject spriteWithFile: [NSString stringWithFormat:@"fireball_2.png"]];
     
     
     stone.tag = STONE_TAG;
@@ -668,7 +668,7 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
     
     if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
         [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-        [[GameScene sharedGameScene] showPausedMenu];
+        [[GameScene sharedGameScene] showPausedMenu:2];
         [[CCDirector sharedDirector] pause];
         
     }

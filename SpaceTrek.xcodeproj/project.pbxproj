@@ -55,6 +55,9 @@
 		CF4B4ADD1813383D00912025 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF4B4ADC1813383D00912025 /* Player.mm */; };
 		CF4B4AE41813435200912025 /* SpaceShip2.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF4B4AE21813435200912025 /* SpaceShip2.plist */; };
 		CF4B4AE51813435200912025 /* SpaceShip2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4B4AE31813435200912025 /* SpaceShip2.png */; };
+		F10D14A11833F844006A15C5 /* fireball_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F10D149E1833F844006A15C5 /* fireball_1.png */; };
+		F10D14A21833F844006A15C5 /* fireball_2.png in Resources */ = {isa = PBXBuildFile; fileRef = F10D149F1833F844006A15C5 /* fireball_2.png */; };
+		F10D14A31833F844006A15C5 /* fireball_3.png in Resources */ = {isa = PBXBuildFile; fileRef = F10D14A01833F844006A15C5 /* fireball_3.png */; };
 		F121428D1814979F00C50904 /* LoadingScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = F121428C1814979F00C50904 /* LoadingScene.mm */; };
 		F14122BD1803AB4800C1B8AD /* Button-Pause-icon-modified.png in Resources */ = {isa = PBXBuildFile; fileRef = F14122BC1803AB4800C1B8AD /* Button-Pause-icon-modified.png */; };
 		F14E4E70181304B4005D8190 /* HUDLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F14E4E6F181304B4005D8190 /* HUDLayer.mm */; };
@@ -335,6 +338,9 @@
 		CF4B4ADC1813383D00912025 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
 		CF4B4AE21813435200912025 /* SpaceShip2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpaceShip2.plist; sourceTree = "<group>"; };
 		CF4B4AE31813435200912025 /* SpaceShip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpaceShip2.png; sourceTree = "<group>"; };
+		F10D149E1833F844006A15C5 /* fireball_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireball_1.png; sourceTree = "<group>"; };
+		F10D149F1833F844006A15C5 /* fireball_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireball_2.png; sourceTree = "<group>"; };
+		F10D14A01833F844006A15C5 /* fireball_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireball_3.png; sourceTree = "<group>"; };
 		F121428B1814979F00C50904 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		F121428C1814979F00C50904 /* LoadingScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadingScene.mm; sourceTree = "<group>"; };
 		F14122BC1803AB4800C1B8AD /* Button-Pause-icon-modified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button-Pause-icon-modified.png"; sourceTree = "<group>"; };
@@ -1543,6 +1549,9 @@
 		F17B976617FCEC8800BD6670 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				F10D149E1833F844006A15C5 /* fireball_1.png */,
+				F10D149F1833F844006A15C5 /* fireball_2.png */,
+				F10D14A01833F844006A15C5 /* fireball_3.png */,
 				F1CC4158182AF4C70026C4E2 /* treasure_type_8.png */,
 				F1CC4155182AC5760026C4E2 /* treasure_type_1.png */,
 				F1640E80182A371100AADE1E /* STORE_Invincible15s.png */,
@@ -1663,8 +1672,10 @@
 				75E2846718021E810003E344 /* scroll.png in Resources */,
 				757BA8571814B9E6006645AA /* runway.png in Resources */,
 				F1CC4159182AF4C70026C4E2 /* treasure_type_8.png in Resources */,
+				F10D14A21833F844006A15C5 /* fireball_2.png in Resources */,
 				F14E4E7A18130ED0005D8190 /* MENU.png in Resources */,
 				757BA84F1814A7D4006645AA /* LaunchSong.mp3 in Resources */,
+				F10D14A11833F844006A15C5 /* fireball_1.png in Resources */,
 				757BA84B1814A559006645AA /* loadingBackground.png in Resources */,
 				F17B952117FCBB7A00BD6670 /* Icon-Small.png in Resources */,
 				F17B952317FCBB7A00BD6670 /* Icon-Small@2x.png in Resources */,
@@ -1693,6 +1704,7 @@
 				75FBF9C21813258C0096B82A /* StatusBar.png in Resources */,
 				F17B976817FCEC9900BD6670 /* ship-level-1.png in Resources */,
 				75BB0DAD1805C82C0076765A /* PlayMode_Music_New.mp3 in Resources */,
+				F10D14A31833F844006A15C5 /* fireball_3.png in Resources */,
 				75EFB43E18330530006B290A /* background-chooseLevel.png in Resources */,
 				75E9EFE6182009DA006A633D /* treasure_type_6.png in Resources */,
 				75E2846418021E250003E344 /* spaceship-level-2-2.png in Resources */,

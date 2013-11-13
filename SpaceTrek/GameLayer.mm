@@ -665,11 +665,10 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
 
 
 - (void)pauseButtonSelected {
-    //    [self zoomPause];
     
         if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
             [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-            [[GameScene sharedGameScene] showPausedMenu];
+            [[GameScene sharedGameScene] showPausedMenu:1];
             [[CCDirector sharedDirector] pause];
     
         }

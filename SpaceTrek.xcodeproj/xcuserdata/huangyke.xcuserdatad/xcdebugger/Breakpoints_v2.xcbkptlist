@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406011238.390961"
+            timestampString = "406019509.652994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "675"
-            endingLineNumber = "675"
+            startingLineNumber = "674"
+            endingLineNumber = "674"
             landmarkName = "-pauseButtonSelected"
             landmarkType = "5">
             <Locations>
@@ -548,12 +548,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/HUDLayer.mm"
-            timestampString = "405461488.974025"
+            timestampString = "406019266.288384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "-init"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-initWithLevel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -564,12 +564,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/HUDLayer.mm"
-            timestampString = "405462693.360853"
+            timestampString = "406019266.288384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-init"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-initWithLevel:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -610,12 +610,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/HUDLayer.mm"
-            timestampString = "405462843.660842"
+            timestampString = "406019266.288384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "-init"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-initWithLevel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

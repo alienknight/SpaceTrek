@@ -281,7 +281,7 @@ bool isbullet_3;
                 treasureNumber--;
                 if ( treasureNumber==0 ){
                     [self unscheduleAllSelectors];
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_ONE Score:self.score Distance:distance]]];
+                    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_THREE Score:self.score Distance:distance]]];
                 }
             }
             
@@ -364,7 +364,7 @@ bool isbullet_3;
 -(void)JumpToGameOverScene:(ccTime)delta
 {
     [self unscheduleAllSelectors];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_ONE Score:self.score Distance:distance]]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_THREE Score:self.score Distance:distance]]];
 }
 
 -(void) playerBack
@@ -669,7 +669,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     
     if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
         [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-        [[GameScene sharedGameScene] showPausedMenu];
+        [[GameScene sharedGameScene] showPausedMenu:3];
         [[CCDirector sharedDirector] pause];
         
     }

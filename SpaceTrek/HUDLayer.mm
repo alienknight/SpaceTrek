@@ -19,7 +19,7 @@ int hudLevel;
     return self;
 }
 
--(id) init
+-(id) initWithLevel:(int)state
 {
 	if ((self = [super init]))
 	{
@@ -39,12 +39,27 @@ int hudLevel;
         [self addChild:statusBar z:2];
         [statusBar addChild:distanceLabel z:30];
      
+        switch (state) {
+            case GAME_STATE_ONE:
+            
+            break;
+            case GAME_STATE_TWO:
+                shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
+                [shadow setAnchorPoint: ccp(0,0.5)];
+                [shadow setPosition: ccp(0, winSize.height/2)];
+                [self addChild:shadow z:1];
+            break;
+            case GAME_STATE_THREE:
+                shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
+                [shadow setAnchorPoint: ccp(0,0.5)];
+                [shadow setPosition: ccp(0, winSize.height/2)];
+                [self addChild:shadow z:1];
+            break;
+            default:
+            break;
+        }
         
         
-        shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
-        [shadow setAnchorPoint: ccp(0,0.5)];
-        [shadow setPosition: ccp(0, winSize.height/2)];
-        [self addChild:shadow z:1];
         
         pauseButton = [CCMenuItemImage itemWithNormalImage:@"Button-Pause-icon-modified.png" selectedImage:@"Button-Pause-icon-modified.png" target:self selector:@selector(pauseButtonSelectedCur)];
         pauseButton.scale = 0.8;

@@ -22,6 +22,7 @@
     
     CCSprite * shadow;
 }
+- (id) initWithLevel:(int)level;
 -(void) updateDistanceCounter:(int)amount;
 
 -(void) setShadowPosition:(int) x yy:(int) y;
