@@ -68,6 +68,7 @@
 -(void) ChangeGoBackSound;
 -(bool) propertyListener: (int)propertyTag;
 - (void) dealloc;
+-(void)setPlayerVelocity;
 
 @property  (nonatomic, readwrite) b2World* world;
 @property  (nonatomic, readwrite) int distance;

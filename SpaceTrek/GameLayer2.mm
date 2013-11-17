@@ -179,7 +179,7 @@ bool isbullet_2;
                 world->DestroyBody(b);
                 continue;
             }
-            if(treasureData.tag == OBSTACLE_DESTROY_TAG)
+            if(treasureData.tag == TREASURE_DESTROY_BYBULLET_TAG)
             {
                 [self removeChild:treasureData cleanup:YES];
                 world->DestroyBody(b);
@@ -191,7 +191,7 @@ bool isbullet_2;
                 world->DestroyBody(b);
                 continue;
             }
-            if(treasureData.tag == TREASURE_DESTROY_TAG || treasureData.tag == OBSTACLE_COLLECT_TAG)
+            if(treasureData.tag == TREASURE_DESTROY_TAG)
             {
                 //[self removeChild:treasureData cleanup:YES];
                 //world->DestroyBody(b);

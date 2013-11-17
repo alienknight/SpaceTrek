@@ -180,7 +180,7 @@ bool isbullet_3;
                 world->DestroyBody(b);
                 continue;
             }
-            if(treasureData.tag == OBSTACLE_DESTROY_TAG)
+            if(treasureData.tag == TREASURE_DESTROY_BYBULLET_TAG)
             {
                 [self removeChild:treasureData cleanup:YES];
                 world->DestroyBody(b);
@@ -192,7 +192,7 @@ bool isbullet_3;
                 world->DestroyBody(b);
                 continue;
             }
-            if(treasureData.tag == TREASURE_DESTROY_TAG || treasureData.tag == OBSTACLE_COLLECT_TAG)
+            if(treasureData.tag == TREASURE_DESTROY_TAG)
             {
                 //[self removeChild:treasureData cleanup:YES];
                 //world->DestroyBody(b);
@@ -760,9 +760,8 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
                 b2Vec2 playerPos = player->playerBody->GetPosition();
                 b2Vec2 treasurePos = b->GetPosition();
                 
-                if (  sqrt( sqr(treasurePos.x-playerPos.x)+sqr(treasurePos.y-playerPos.y) ) < 20 ){
-                    // b2Vec2 force1 = b2Vec2(0.0f,0.0f);
-                    //b->SetLinearVelocity(force1);
+                if (  sqrt( sqr(treasurePos.x-playerPos.x)+sqr(treasurePos.y-playerPos.y) ) < 20 )
+                {
                     
                     float delX = treasurePos.x-playerPos.x;
                     float delY = treasurePos.y-playerPos.y;

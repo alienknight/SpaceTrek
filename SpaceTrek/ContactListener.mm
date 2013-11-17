@@ -33,7 +33,7 @@ void ContactListener::BeginContact(b2Contact *contact) {
         {
             GameObject *bulletSprite=(spriteA.tag==BULLET_TAG)?spriteA:spriteB;
             GameObject* obstacleSprite =(spriteA.tag==TREASURE_TAG)?spriteA:spriteB;
-            obstacleSprite.tag = OBSTACLE_DESTROY_TAG;
+            obstacleSprite.tag = TREASURE_DESTROY_BYBULLET_TAG;
             bulletSprite.tag = BULLET_DESTROY_TAG;
             return;
         }
@@ -77,44 +77,23 @@ void ContactListener::BeginContact(b2Contact *contact) {
             }
             else if(spriteB.type==gameObjectObstacle)
             {
-                GameObject *treasuerSprite=(spriteA.type==gameObjectPlayer)?spriteB:spriteA;
-                GameObject* playerSprite =(spriteA.type==gameObjectPlayer)?spriteA:spriteB;
-                Player* player = (Player*)playerSprite;
-                CCScene* scene = [[CCDirector sharedDirector] runningScene];
-                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
                 
-                
-                if(player.numOfAffordCollsion > 0)
-                {
-                    treasuerSprite.tag = OBSTACLE_DESTROY_TAG;
-                    player.numOfAffordCollsion--;
-                    [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
-                    player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
-                    if ( player.numOfAffordCollsion == 0 )
-                        player.scale = 1.0;
-                }
-                else
-                {
-                    [[SimpleAudioEngine sharedEngine]playEffect:@"CrashSong.mp3"];
-                    
-                    [layer playerBack];
-                    [layer ChangeGoBackSound];
-                    
-                    treasuerSprite.tag = OBSTACLE_DESTROY_TAG;
-                    [playerSprite setType:gameObjectCollector];
-                }
             }
+            
         }
         else if(spriteA.type==gameObjectCollector)
         {
-            if(spriteB.type==gameObjectTreasure1 || spriteB.type == gameObjectObstacle)
+            if(spriteB.type==gameObjectTreasure1)
             {
                 GameObject *treasuerSprite=(spriteA.type==gameObjectCollector)?spriteB:spriteA;
                 
-                if(spriteB.type == gameObjectTreasure1)
-                    treasuerSprite.tag = TREASURE_DESTROY_TAG;
-                if(spriteB.type == gameObjectObstacle)
-                    treasuerSprite.tag = OBSTACLE_COLLECT_TAG;
+                CCScene* scene = [[CCDirector sharedDirector] runningScene];
+                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+                [layer setPlayerVelocity];
+                
+                treasuerSprite.tag = TREASURE_DESTROY_TAG;
+                
+                
                 
             }
         }
