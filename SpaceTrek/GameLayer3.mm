@@ -215,6 +215,11 @@ bool isSetPlayerVelocity_3;
                     treasureData.visible = false;
                     collectedTreasure.push_back(b);
                     [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
+                    if( gamePart1 && isSetPlayerVelocity_3)
+                    {
+                        [self setPlayerVelocity];
+                    }
+                    
                     if ( gamePart2 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
@@ -244,13 +249,16 @@ bool isSetPlayerVelocity_3;
                 gamePart2 = false;
                 
             }
-            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=100&&isPlayerCollect_3)
+            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=50&&isPlayerCollect_3)
             {
                 b2Vec2 force = b2Vec2(0, 0);
                 b->SetLinearVelocity(force);
                 [self treasureBack];
                 isPlayerCollect_3=false;
                 isSetPlayerVelocity_3 = false;
+                
+                gamePart1 = false;
+                gamePart2 = true;
             }
             if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-treasureData.contentSize.width)<=10 && isPlayerBacktoStation_3)
             {
@@ -427,8 +435,6 @@ bool isSetPlayerVelocity_3;
 {
     isPlayerMoveBack_3 = true;
     isStationMoveBack_3 = true;
-    gamePart1 = false;
-    gamePart2 = true;
 }
 -(void) treasureBack
 {
@@ -877,6 +883,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
             return false;
         }
         [self schedule:@selector(SetUpMagnet:)];
+        [player magnetAction];
         [self schedule:@selector(endMagnet:) interval:15];
     }
     else if(propertyTag == TREASURE_PROPERTY_TYPE_4_TAG)

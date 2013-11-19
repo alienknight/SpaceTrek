@@ -86,11 +86,11 @@ void ContactListener::BeginContact(b2Contact *contact) {
             if(spriteB.type==gameObjectTreasure1)
             {
                 GameObject *treasuerSprite=(spriteA.type==gameObjectCollector)?spriteB:spriteA;
-                
+                /*
                 CCScene* scene = [[CCDirector sharedDirector] runningScene];
                 GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
                 [layer setPlayerVelocity];
-                
+                */
                 treasuerSprite.tag = TREASURE_DESTROY_TAG;
                 
                 

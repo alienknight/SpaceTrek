@@ -208,6 +208,11 @@ bool isSetPlayerVelocity_2;
                     treasureData.visible = false;
                     collectedTreasure.push_back(b);
                     [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
+                    if( gamePart1 && isSetPlayerVelocity_2)
+                    {
+                        [self setPlayerVelocity];
+                    }
+                    
                     if ( gamePart2 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
@@ -236,13 +241,16 @@ bool isSetPlayerVelocity_2;
                 gamePart2 = false;
                 
             }
-            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=100&&isPlayerCollect_2)
+            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=50&&isPlayerCollect_2)
             {
                 b2Vec2 force = b2Vec2(0, 0);
                 b->SetLinearVelocity(force);
                 [self treasureBack];
                 isPlayerCollect_2=false;
                 isSetPlayerVelocity_2 = false;
+                
+                gamePart1 = false;
+                gamePart2 = true;
             }
             if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-treasureData.contentSize.width)<=10 && isPlayerBacktoStation_2)
             {
@@ -419,8 +427,6 @@ bool isSetPlayerVelocity_2;
 {
     isPlayerMoveBack_2 = true;
     isStationMoveBack_2 = true;
-    gamePart1 = false;
-    gamePart2 = true;
 }
 -(void) treasureBack
 {

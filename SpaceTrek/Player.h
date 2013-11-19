@@ -21,6 +21,10 @@
     CCAnimation *spacemanAnimation;
     CCFiniteTimeAction *exlosionAction;
     CCAnimation *exlosionAnimation;
+    CCFiniteTimeAction *magnet1Action;
+    CCAnimation *magnet1Animation;
+    CCFiniteTimeAction *magnet2Action;
+    CCAnimation *magnet2Animation;
     
     BOOL collison;
     
@@ -31,6 +35,7 @@
 -(void) createBox2dObject:(b2World*)world;
 -(void) initAnimation:(CCSpriteBatchNode*)batchNode;
 -(void) crashTransformAction;
+-(void) magnetAction;
 +(Player*) getPlayer;
 -(b2Body*) getBody;
 

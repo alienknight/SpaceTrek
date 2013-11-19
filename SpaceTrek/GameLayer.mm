@@ -205,10 +205,11 @@ bool isSetPlayerVelocity;
                     treasureData.visible = false;
                     collectedTreasure.push_back(b);
                     [[SimpleAudioEngine sharedEngine]playEffect:@"CollectTreasure.wav"];
-                    if(treasureData!=NULL && isSetPlayerVelocity)
+                    if( gamePart1 && isSetPlayerVelocity)
                     {
                         [self setPlayerVelocity];
-                    }else
+                    }
+                    
                     if ( gamePart2 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
@@ -237,7 +238,7 @@ bool isSetPlayerVelocity;
                 gamePart2 = false;
                 
             }
-            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=100&&isPlayerCollect)
+            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=50&&isPlayerCollect)
             {
                 b2Vec2 force = b2Vec2(0, 0);
                 b->SetLinearVelocity(force);
@@ -912,6 +913,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         }
         [self schedule:@selector(SetUpMagnet:)];
         [self schedule:@selector(endMagnet:) interval:15];
+        [player magnetAction];
     }
     else if(propertyTag == TREASURE_PROPERTY_TYPE_4_TAG)
     {

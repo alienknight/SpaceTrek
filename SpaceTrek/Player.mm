@@ -97,7 +97,7 @@
           [NSString stringWithFormat:@"spaceman-%d.png", i]]];
     }
     spacemanAnimation = [CCAnimation animationWithSpriteFrames:spacemanAnimFrames delay:0.09f];
-    spacemanAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: spacemanAnimation] times:2];
+    spacemanAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: spacemanAnimation] times:200];
     
     
    /* NSMutableArray *exlosionAnimFrames = [NSMutableArray array];
@@ -114,7 +114,46 @@
     CCSequence *seq = nil;
     seq = [CCSequence actions:crashAction,spacemanAction,nil];
 
-    [self runAction:[CCSequence actions:seq, actionMoveDone, nil]];
+    //[self runAction:[CCSequence actions:seq, actionMoveDone, nil]];
+    [self runAction:[CCSequence actions:actionMoveDone, seq, nil]];
+}
+
+-(void) magnetAction
+{
+    [self stopAllActions];
+    NSMutableArray *magnet1AnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 1; ++i){
+        [magnet1AnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceman_magnet_%d.png", i]]];
+    }
+    magnet1Animation = [CCAnimation animationWithSpriteFrames:magnet1AnimFrames delay:0.09f];
+    magnet1Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet1Animation] times:10];
+    
+    
+    NSMutableArray *magnet2AnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [magnet1AnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceman_magnet_%d.png", i]]];
+    }
+    magnet2Animation = [CCAnimation animationWithSpriteFrames:magnet2AnimFrames delay:0.09f];
+    magnet2Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet2Animation] times:5];
+    
+    
+    NSMutableArray *spacemanAnimFrames = [NSMutableArray array];
+    for(int i = 0; i <= 7; ++i){
+        [spacemanAnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceman-%d.png", i]]];
+    }
+    spacemanAnimation = [CCAnimation animationWithSpriteFrames:spacemanAnimFrames delay:0.09f];
+    spacemanAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: spacemanAnimation] times:2000];
+    
+    
+    id seq = [CCSequence actions:magnet1Action,magnet2Action,nil];
+    
+    [self runAction:[CCSequence actions:seq, spacemanAction, nil]];
 }
 
 -(void) crashTransformActionFinished:(id)sender
