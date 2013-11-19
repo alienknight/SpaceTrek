@@ -63,6 +63,8 @@
     
     std::vector<b2Body*> collectedTreasure;
     
+    std::vector<b2Body*> blackholeVector;
+    
 @public
     bool collision;
 }
@@ -71,6 +73,7 @@
 -(void) ChangeGoBackSound;
 -(bool) propertyListener: (int)propertyTag;
 - (void) dealloc;
+-(void)setPlayerVelocity;
 
 @property  (nonatomic, readwrite) b2World* world;
 @property  (nonatomic, readwrite) int distance;

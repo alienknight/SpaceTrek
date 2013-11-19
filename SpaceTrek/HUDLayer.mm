@@ -118,6 +118,12 @@ int hudLevel;
                 [PropertyMenu addChild:property4];
                 num++;
                 break;
+            case 5:
+                property5 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Bullet.png" selectedImage:@"TOOLBAR_Bullet.png" target:self selector:@selector(propertySelected5)];
+                property5.tag = TREASURE_PROPERTY_TYPE_5_TAG;
+                [PropertyMenu addChild:property5];
+                num++;
+                break;
             default:
                 break;
         }
@@ -183,7 +189,16 @@ int hudLevel;
         purcharsedProperty.erase(4);
     }
 }
-
+-(void) propertySelected5
+{
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+    bool used = [layer propertyListener:property5.tag];
+    if ( used ){
+        [PropertyMenu removeChild:property5];
+        purcharsedProperty.erase(5);
+    }
+}
 -(void) propertySelectedNull
 {
 }

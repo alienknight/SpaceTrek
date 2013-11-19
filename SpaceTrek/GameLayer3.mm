@@ -22,31 +22,34 @@
 
 bool isReach_3;
 bool isPlayerMoveBack_3;
+bool isPlayerCollect_3;
 bool isStationMoveBack_3;
 bool isPlayerBacktoStation_3;
 bool isCollect_3;
 bool isbullet_3;
+bool isCollectCircle_3;
+bool isSetPlayerVelocity_3;
 
 -(id) init{
     self = [super init];
     if(self){
-        /*
-         CCSprite *bg = [CCSprite spriteWithFile:@"version_1_level_1_background(map).png"];
-         bg.anchorPoint = ccp(0, 0);
-         [self addChild: bg z:-10];
-         */
+        
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         collectedTreasure.clear();
+        blackholeVector.clear();
         
         treasureSpeedMultiplier = 1;
         gamePart1 = true;
         gamePart2 = false;
         isPlayerMoveBack_3 = false;
+        isPlayerCollect_3 = false;
         isStationMoveBack_3 = false;
         isPlayerBacktoStation_3 = false;
         isCollect_3 = false;
         isbullet_3 = false;
+        isCollectCircle_3 = false;
+        isSetPlayerVelocity_3 = false;
         self.tag = GAME_LAYER_TAG;
         
         
@@ -61,7 +64,6 @@ bool isbullet_3;
         
         
         
-        
         [self addBeginStone: winSize.width/3*2 yy:winSize.height/2];
         [self addBeginStone: winSize.width/5*4 yy:winSize.height/4];
         
@@ -72,16 +74,21 @@ bool isbullet_3;
         [player initAnimation:allBatchNode];
         
         
+        
         player.position = ccp(0, winSize.height/2);
         player.tag = PLAYER_TAG;
         
         [player createBox2dObject:world];
+        
+        
         
         [self addSpaceStation];
         
         isReach_3=false;
         
         [self schedule:@selector(treasureMovementLogic:)];
+        
+        [self schedule:@selector(blackholeLogic:)];
         
         hudLayer = nil;
         [self schedule:@selector(update:)];
@@ -160,6 +167,14 @@ bool isbullet_3;
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
             CCSprite *treasureData = (CCSprite *)b->GetUserData();
+            
+            if(treasureData.tag == PLAYER_TAG)
+            {
+                b2Vec2 force = b2Vec2(player->playerBody->GetLinearVelocity().x, 10);
+                player->playerBody->SetLinearVelocity(force);
+            }
+             
+            
             if(treasureData.tag == BULLET_TAG)
             {
                 if(treasureData.position.x>winSize.width)
@@ -214,6 +229,7 @@ bool isbullet_3;
                 [self schedule:@selector(playerMoveFinished:)];
                 self.isAccelerometerEnabled=YES;
                 self.isTouchEnabled = YES;
+                [self addBlackhole];
                 
             }
             if(treasureData!=NULL && treasureData.tag==SPACESTATION_TAG && fabs(treasureData.position.x-winSize.width/2)<=100 && isStationMoveBack_3)
@@ -228,6 +244,14 @@ bool isbullet_3;
                 gamePart2 = false;
                 
             }
+            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-winSize.width/5*4)<=100&&isPlayerCollect_3)
+            {
+                b2Vec2 force = b2Vec2(0, 0);
+                b->SetLinearVelocity(force);
+                [self treasureBack];
+                isPlayerCollect_3=false;
+                isSetPlayerVelocity_3 = false;
+            }
             if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-treasureData.contentSize.width)<=10 && isPlayerBacktoStation_3)
             {
                 b2Vec2 force = b2Vec2(0, 0);
@@ -239,7 +263,10 @@ bool isbullet_3;
                 
                 
             }
-            
+            if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && isSetPlayerVelocity_3)
+            {
+                [self setPlayerVelocity];
+            }
             
             treasureData.position = ccp(b->GetPosition().x*PTM_RATIO,
                                         b->GetPosition().y*PTM_RATIO);
@@ -266,26 +293,55 @@ bool isbullet_3;
     CGPoint location = [touch locationInView: [touch view]];
     location = [[CCDirector sharedDirector] convertToGL: location];
     b2Vec2 position = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
-        if (b->GetUserData() != NULL) {
-            b2Fixture *f = b->GetFixtureList();
-            CCSprite *treasureData = (CCSprite *)b->GetUserData();
-            if(treasureData.tag!=SPACESTATION_TAG && f->TestPoint(position)&&isCollect_3)
-            {
-                CCLOG(@"here 0");
-                
-                GameObject* treasureObj = (__bridge GameObject *)treasureData;
-                self.score += treasureObj.score;
-                treasureData.tag = TREASURE_COLLECT_TAG;
-                
-                treasureNumber--;
-                if ( treasureNumber==0 ){
-                    [self unscheduleAllSelectors];
-                    [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:[GameOverScene sceneWithLevel:GAME_STATE_THREE Score:self.score Distance:distance]]];
+    if(isCollectCircle_3)
+    {
+        for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+            if (b->GetUserData() != NULL) {
+                CCSprite *treasureData = (CCSprite *)b->GetUserData();
+                if(treasureData.tag!=SPACESTATION_TAG && (sqrt(sqr(b->GetPosition().x-position.x)+sqr(b->GetPosition().y-position.y))<4)&&isCollect_3)
+                {
+                    CCLOG(@"here 0");
+                    
+                    /* Draw a circle by plist, one second disappear
+                     CCSprite* circle= [CCSprite spriteWithFile:@"StatusBar.png"];
+                     circle.position = ccp(location.x, location.y);
+                     [self addChild:circle z:2 tag:CIRCLE_TAG];
+                     */
+                    
+                    GameObject* treasureObj = (__bridge GameObject *)treasureData;
+                    self.score += treasureObj.score;
+                    treasureData.tag = TREASURE_COLLECT_TAG;
+                    
+                    treasureNumber--;
+                    if ( treasureNumber==0 ){
+                        [self unscheduleAllSelectors];
+                        [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:  [GameOverScene sceneWithLevel:GAME_STATE_THREE Score:self.score Distance:distance]]];
+                    }
                 }
             }
-            
-            
+        }
+    }
+    else
+    {
+        for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+            if (b->GetUserData() != NULL) {
+                b2Fixture *f = b->GetFixtureList();
+                CCSprite *treasureData = (CCSprite *)b->GetUserData();
+                if(treasureData.tag!=SPACESTATION_TAG && f->TestPoint(position)&&isCollect_3)
+                {
+                    CCLOG(@"here 0");
+                    
+                    GameObject* treasureObj = (__bridge GameObject *)treasureData;
+                    self.score += treasureObj.score;
+                    treasureData.tag = TREASURE_COLLECT_TAG;
+                    
+                    treasureNumber--;
+                    if ( treasureNumber==0 ){
+                        [self unscheduleAllSelectors];
+                        [[CCDirector sharedDirector] replaceScene:[CCTransitionProgressRadialCCW transitionWithDuration:1.0 scene:  [GameOverScene sceneWithLevel:GAME_STATE_THREE Score:self.score Distance:distance]]];
+                    }
+                }
+            }
         }
     }
 }
@@ -488,6 +544,83 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     
 }
 
+-(void)addBlackhole
+{
+    GameObject *blackhole;
+    blackhole = [[GameObject alloc] init];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+//    int treasureIndex = arc4random()%8+1;
+//    blackhole = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_%d.png", treasureIndex] ];
+    
+    blackhole = [GameObject spriteWithFile: [NSString stringWithFormat:@"blackhole.png"]];
+    
+//    backhole.tag = TREASURE_TAG;
+//    [treasure setType:gameObjectTreasure1];
+    
+    int blackholeStartY = GetRandom_3( blackhole.contentSize.height/2, winSize.height - blackhole.contentSize.height/2 );
+    
+    blackhole.position = ccp(winSize.width - blackhole.contentSize.width/2, blackholeStartY);
+    
+    [self addChild:blackhole];
+    
+    b2BodyDef blackholeBodyDef;
+    blackholeBodyDef.type = b2_dynamicBody;
+    blackholeBodyDef.position.Set(blackhole.position.x/PTM_RATIO, blackhole.position.y/PTM_RATIO);
+    blackholeBodyDef.userData = blackhole;
+    
+    
+    
+    
+    blackholeBodyDef.userData = (__bridge_retained void*) blackhole;
+    
+    b2Body* blackholeBody = world->CreateBody(&blackholeBodyDef);
+    
+    blackholeVector.push_back(blackholeBody);
+    
+    b2Vec2 force = b2Vec2(-TRAVEL_SPEED*treasureSpeedMultiplier, 0);
+    blackholeBody->SetLinearVelocity(force);
+    
+    b2CircleShape circle;
+    circle.m_radius = blackhole.contentSize.width/2/PTM_RATIO;
+    
+    b2FixtureDef blackholeShapeDef;
+    blackholeShapeDef.shape = &circle;
+    blackholeShapeDef.density = 3.0f;
+    blackholeShapeDef.friction = 0.0f;
+    blackholeShapeDef.restitution = 1.0f;
+    blackholeShapeDef.filter.categoryBits = 0x2;
+    blackholeShapeDef.filter.maskBits = 0xFFFF-0x2;
+    
+    blackholeBody->CreateFixture(&blackholeShapeDef);
+    
+    
+}
+
+
+-(void) blackholeLogic:(ccTime)dt
+{
+    for (int i=0; i<blackholeVector.size(); i++)
+    {
+        b2Body *b = blackholeVector[i];
+        b2Vec2 blackholePos = b->GetPosition();
+        b2Vec2 playerPos = player->playerBody->GetPosition();
+                    
+        if (  sqrt( sqr(playerPos.x-blackholePos.x)+sqr(playerPos.y-blackholePos.y) ) < 20 )
+        {
+                
+            float delX = playerPos.x-blackholePos.x;
+            float delY = playerPos.y-blackholePos.y;
+            delX = -7*delX;
+            delY = -7*delY;
+            b2Vec2 force = b2Vec2(0, delY);
+            player->playerBody->SetLinearVelocity(force);
+            break;
+        }
+    }
+    
+}
+
+
 -(void)addStone
 {
     GameObject *stone;
@@ -644,16 +777,18 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     {
         [self pauseSchedulerAndActions];
         [player crashTransformAction];
+         b2Vec2 force = b2Vec2(TRAVEL_SPEED, 0);
+        player->playerBody->SetLinearVelocity(force);
         
-        b2Vec2 position1(winSize.width/5*4/PTM_RATIO, player.position.y/PTM_RATIO);
-        player->playerBody->SetTransform(position1, 0.0);
+        isSetPlayerVelocity_3 = true;
         
         [self unschedule:@selector(playerMoveFinished:)];
         [self unschedule:@selector(gameLogic:)];
         [self unschedule:@selector(gameStoneLogic:)];
         [self unschedule:@selector(addTreasure:)];
-        [self treasureBack];
-        isPlayerMoveBack_3=false;
+        
+        isPlayerMoveBack_3 = false;
+        isPlayerCollect_3 = true;
     }
     else
     {
@@ -661,6 +796,13 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
         player->playerBody->SetTransform(position1, 0.0);
         [hudLayer setShadowPosition:player.position.x yy:newY];
     }
+}
+
+-(void)setPlayerVelocity
+{
+    b2Vec2 force = b2Vec2(TRAVEL_SPEED, 0);
+    player->playerBody->SetLinearVelocity(force);
+    //    player->playerBody->ApplyLinearImpulse(force, player->playerBody->GetWorldCenter());
 }
 
 
@@ -744,6 +886,13 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
         }
         isbullet_3 = true;
         [self schedule:@selector(endBullet:) interval:15];
+    }
+    else if(propertyTag == TREASURE_PROPERTY_TYPE_5_TAG)
+    {
+        if(gamePart1||gamePart2)
+            return false;
+        isCollectCircle_3 = true;
+        [self schedule:@selector(endCollectCirle:) interval:15];
     }
     return true;
 }

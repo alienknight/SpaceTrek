@@ -52,7 +52,7 @@ std::set<int> purcharsedProperty;
     property4 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected4)];
     property4.tag = STORE_PROPERTY_TYPE_4_TAG;
     
-    property5 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected4)];
+    property5 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected5)];
     property5.tag = STORE_PROPERTY_TYPE_5_TAG;
     
     PropertyMenu = [CCMenu menuWithItems:property1, property2, property3,property4,property5, nil];
@@ -91,6 +91,13 @@ std::set<int> purcharsedProperty;
     property4.visible = false;
 //    [self removeChild:property4];
     purcharsedProperty.insert(4);
+}
+
+-(void) storePropertySelected5
+{
+    property5.visible = false;
+    //    [self removeChild:property4];
+    purcharsedProperty.insert(5);
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
