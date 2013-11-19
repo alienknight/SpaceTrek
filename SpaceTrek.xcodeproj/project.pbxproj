@@ -19,6 +19,8 @@
 		75BB0DB71805D1FC0076765A /* HELP.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BB0DB41805D1FC0076765A /* HELP.png */; };
 		75BB0DB81805D1FC0076765A /* PLAY.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BB0DB51805D1FC0076765A /* PLAY.png */; };
 		75BB0DB91805D1FC0076765A /* STORE.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BB0DB61805D1FC0076765A /* STORE.png */; };
+		75CD32FB183C05C6000D3D52 /* Character.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75CD32F9183C05C6000D3D52 /* Character.plist */; };
+		75CD32FC183C05C6000D3D52 /* Character.png in Resources */ = {isa = PBXBuildFile; fileRef = 75CD32FA183C05C6000D3D52 /* Character.png */; };
 		75D9DECA181451AA00CC87E7 /* PlayMode_Music_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75D9DEC9181451AA00CC87E7 /* PlayMode_Music_back.mp3 */; };
 		75E2846418021E250003E344 /* spaceship-level-2-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 75E2846218021E250003E344 /* spaceship-level-2-2.png */; };
 		75E2846518021E250003E344 /* spaceship-level-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 75E2846318021E250003E344 /* spaceship-level-2.png */; };
@@ -36,8 +38,6 @@
 		75E9EFE8182009DA006A633D /* treasure_type_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 75E9EFE3182009DA006A633D /* treasure_type_4.png */; };
 		75E9EFF31820806A006A633D /* exlosion_bg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E9EFF11820806A006A633D /* exlosion_bg.plist */; };
 		75E9EFF41820806A006A633D /* exlosion_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 75E9EFF21820806A006A633D /* exlosion_bg.png */; };
-		75E9EFF718208B51006A633D /* Character.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E9EFF518208B51006A633D /* Character.plist */; };
-		75E9EFF818208B51006A633D /* Character.png in Resources */ = {isa = PBXBuildFile; fileRef = 75E9EFF618208B51006A633D /* Character.png */; };
 		75EE58371809C5460056F048 /* ContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75EE58361809C5460056F048 /* ContactListener.mm */; };
 		75EFB41E1832D9DC006B290A /* TOOLBAR_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 75EFB41D1832D9DC006B290A /* TOOLBAR_empty.png */; };
 		75EFB4201832DC15006B290A /* TOOLBAR_Invincible15s.png in Resources */ = {isa = PBXBuildFile; fileRef = 75EFB41F1832DC15006B290A /* TOOLBAR_Invincible15s.png */; };
@@ -298,6 +298,8 @@
 		75BB0DB41805D1FC0076765A /* HELP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HELP.png; sourceTree = "<group>"; };
 		75BB0DB51805D1FC0076765A /* PLAY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PLAY.png; sourceTree = "<group>"; };
 		75BB0DB61805D1FC0076765A /* STORE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = STORE.png; sourceTree = "<group>"; };
+		75CD32F9183C05C6000D3D52 /* Character.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Character.plist; sourceTree = "<group>"; };
+		75CD32FA183C05C6000D3D52 /* Character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Character.png; sourceTree = "<group>"; };
 		75D9DEC9181451AA00CC87E7 /* PlayMode_Music_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlayMode_Music_back.mp3; sourceTree = "<group>"; };
 		75E2844E1801DAE50003E344 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		75E2846218021E250003E344 /* spaceship-level-2-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-level-2-2.png"; sourceTree = "<group>"; };
@@ -317,8 +319,6 @@
 		75E9EFE3182009DA006A633D /* treasure_type_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = treasure_type_4.png; sourceTree = "<group>"; };
 		75E9EFF11820806A006A633D /* exlosion_bg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exlosion_bg.plist; sourceTree = "<group>"; };
 		75E9EFF21820806A006A633D /* exlosion_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exlosion_bg.png; sourceTree = "<group>"; };
-		75E9EFF518208B51006A633D /* Character.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Character.plist; sourceTree = "<group>"; };
-		75E9EFF618208B51006A633D /* Character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Character.png; sourceTree = "<group>"; };
 		75EE58361809C5460056F048 /* ContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactListener.mm; sourceTree = "<group>"; };
 		75EE58381809C57E0056F048 /* ContactListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactListener.h; sourceTree = "<group>"; };
 		75EFB41D1832D9DC006B290A /* TOOLBAR_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TOOLBAR_empty.png; sourceTree = "<group>"; };
@@ -1568,9 +1568,9 @@
 				75EFB4311832FDDF006B290A /* STORE_Bullet.png */,
 				F1F5F1211821B2D60084BB33 /* Stone_type_6.png */,
 				F1D9FE0C1820C9E200A27113 /* Property */,
-				75E9EFF518208B51006A633D /* Character.plist */,
-				75E9EFF618208B51006A633D /* Character.png */,
 				75E2846E180220B00003E344 /* fire.png */,
+				75CD32F9183C05C6000D3D52 /* Character.plist */,
+				75CD32FA183C05C6000D3D52 /* Character.png */,
 				75E9EFDF182009DA006A633D /* treasure_type_3.png */,
 				75E9EFE0182009DA006A633D /* treasure_type_5.png */,
 				75E9EFF11820806A006A633D /* exlosion_bg.plist */,
@@ -1694,11 +1694,11 @@
 				757BA8531814B26C006645AA /* CollectTreasure.wav in Resources */,
 				F17B952717FCBB7A00BD6670 /* Icon@2x.png in Resources */,
 				F17B952A17FCBB7B00BD6670 /* iTunesArtwork in Resources */,
+				75CD32FB183C05C6000D3D52 /* Character.plist in Resources */,
 				F17B968317FCBB7F00BD6670 /* ChangeLog in Resources */,
 				F14E4E7B18130ED0005D8190 /* Restart.png in Resources */,
 				F17B974317FCBB8000BD6670 /* blocks.png in Resources */,
 				F17B975A17FCD6AB00BD6670 /* version_1_level_1_background(map).png in Resources */,
-				75E9EFF718208B51006A633D /* Character.plist in Resources */,
 				75E2846518021E250003E344 /* spaceship-level-2.png in Resources */,
 				F1640E83182A371100AADE1E /* STORE_Magnet.png in Resources */,
 				F17B975D17FCD70300BD6670 /* button_play_sel.png in Resources */,
@@ -1711,11 +1711,11 @@
 				F10D14A31833F844006A15C5 /* fireball_3.png in Resources */,
 				75EFB43E18330530006B290A /* background-chooseLevel.png in Resources */,
 				75E9EFE6182009DA006A633D /* treasure_type_6.png in Resources */,
+				75CD32FC183C05C6000D3D52 /* Character.png in Resources */,
 				75E2846418021E250003E344 /* spaceship-level-2-2.png in Resources */,
 				CF4B4AE51813435200912025 /* SpaceShip2.png in Resources */,
 				75EFB4201832DC15006B290A /* TOOLBAR_Invincible15s.png in Resources */,
 				F1F975C2180200AE009B9148 /* space-background-upperlayer.png in Resources */,
-				75E9EFF818208B51006A633D /* Character.png in Resources */,
 				75EFB43C183304C2006B290A /* background-v1.png in Resources */,
 				F1F5F1271821B2D60084BB33 /* Stone_type_6.png in Resources */,
 				75E592AD180F47CA002B088B /* spaceship-boom-step-2.png in Resources */,
