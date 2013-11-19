@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "ContactListener::BeginContact(b2Contact *contact)"
+            landmarkName = "ContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "405991477.467486"
+            timestampString = "406584332.048322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
-            landmarkName = "-treasureCollectMovementLogic:"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
+            landmarkName = "-collectTreasure"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SpaceTrek/HelpScene.mm"
-            timestampString = "405995600.847907"
+            filePath = "SpaceTrek/GameLayer.mm"
+            timestampString = "406584460.675115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "+scene"
+            startingLineNumber = "786"
+            endingLineNumber = "786"
+            landmarkName = "-setPlayerVelocity"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
