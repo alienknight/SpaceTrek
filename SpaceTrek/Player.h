@@ -25,6 +25,8 @@
     CCAnimation *magnet1Animation;
     CCFiniteTimeAction *magnet2Action;
     CCAnimation *magnet2Animation;
+    CCFiniteTimeAction *invincibleAction;
+    CCAnimation *invincibleAnimation;
     
     BOOL collison;
     
@@ -36,6 +38,7 @@
 -(void) initAnimation:(CCSpriteBatchNode*)batchNode;
 -(void) crashTransformAction;
 -(void) magnetAction;
+-(void) invincible;
 +(Player*) getPlayer;
 -(b2Body*) getBody;
 

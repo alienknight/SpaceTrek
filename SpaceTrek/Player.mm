@@ -128,17 +128,17 @@
           [NSString stringWithFormat:@"spaceman_magnet_%d.png", i]]];
     }
     magnet1Animation = [CCAnimation animationWithSpriteFrames:magnet1AnimFrames delay:0.09f];
-    magnet1Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet1Animation] times:10];
+    magnet1Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet1Animation] times:100];
     
     
     NSMutableArray *magnet2AnimFrames = [NSMutableArray array];
     for(int i = 1; i <= 2; ++i){
-        [magnet1AnimFrames addObject:
+        [magnet2AnimFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
           [NSString stringWithFormat:@"spaceman_magnet_%d.png", i]]];
     }
-    magnet2Animation = [CCAnimation animationWithSpriteFrames:magnet2AnimFrames delay:0.09f];
-    magnet2Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet2Animation] times:5];
+    magnet2Animation = [CCAnimation animationWithSpriteFrames:magnet2AnimFrames delay:0.1f];
+    magnet2Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: magnet2Animation] times:75];
     
     
     NSMutableArray *spacemanAnimFrames = [NSMutableArray array];
@@ -153,7 +153,35 @@
     
     id seq = [CCSequence actions:magnet1Action,magnet2Action,nil];
     
-    [self runAction:[CCSequence actions:seq, spacemanAction, nil]];
+    [self runAction:[CCSequence actions:magnet2Action, spacemanAction, nil]];
+}
+
+-(void) invincible
+{
+    [self stopAllActions];
+    NSMutableArray *invincibleAnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [invincibleAnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"invincible%d.png", i]]];
+    }
+    invincibleAnimation = [CCAnimation animationWithSpriteFrames:invincibleAnimFrames delay:0.1f];
+    invincibleAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: invincibleAnimation] times:75];
+    
+    NSMutableArray *runAnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [runAnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceship%d.png", i]]];
+    }
+    
+    playerRunAnimation = [CCAnimation animationWithSpriteFrames:runAnimFrames delay:0.09f];
+    playerRunAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: playerRunAnimation] times:2000];
+    
+    
+    //id seq = [CCSequence actions:magnet1Action,magnet2Action,nil];
+    
+    [self runAction:[CCSequence actions:invincibleAction, playerRunAction, nil]];
 }
 
 -(void) crashTransformActionFinished:(id)sender

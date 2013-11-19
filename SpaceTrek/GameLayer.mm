@@ -246,7 +246,6 @@ bool isSetPlayerVelocity;
                 isPlayerCollect=false;
                 isSetPlayerVelocity = false;
                 
-                gamePart1 = false;
                 gamePart2 = true;
 
             }
@@ -419,6 +418,8 @@ bool isSetPlayerVelocity;
 {
     isPlayerMoveBack = true;
     isStationMoveBack = true;
+    gamePart1 = false;
+
 }
 -(void) treasureBack
 {
@@ -902,6 +903,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
                 }
             }
         }
+        [player invincible];
         [_scheduler resumeTarget:self];
         [self schedule:@selector(gameLogic:) interval:(1.0f/treasureSpeedMultiplier/2.0f)];
         [self schedule:@selector(endInvincible:) interval:15];

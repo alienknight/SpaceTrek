@@ -257,7 +257,6 @@ bool isSetPlayerVelocity_3;
                 isPlayerCollect_3=false;
                 isSetPlayerVelocity_3 = false;
                 
-                gamePart1 = false;
                 gamePart2 = true;
             }
             if(treasureData!=NULL && treasureData.tag==PLAYER_TAG && fabs(treasureData.position.x-treasureData.contentSize.width)<=10 && isPlayerBacktoStation_3)
@@ -435,6 +434,7 @@ bool isSetPlayerVelocity_3;
 {
     isPlayerMoveBack_3 = true;
     isStationMoveBack_3 = true;
+    gamePart1 = false;
 }
 -(void) treasureBack
 {
@@ -873,6 +873,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
                 }
             }
         }
+        [player invincible];
         [_scheduler resumeTarget:self];
         [self schedule:@selector(gameLogic:) interval:(1.0f/treasureSpeedMultiplier/2.0f)];
         [self schedule:@selector(endInvincible:) interval:15];
@@ -883,8 +884,8 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
             return false;
         }
         [self schedule:@selector(SetUpMagnet:)];
-        [player magnetAction];
         [self schedule:@selector(endMagnet:) interval:15];
+        [player magnetAction];
     }
     else if(propertyTag == TREASURE_PROPERTY_TYPE_4_TAG)
     {
