@@ -69,6 +69,10 @@ int buttonSelected;
     
     [[CCDirector sharedDirector] resume];
 
+    
+    GameLayer* gameLayer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+    [gameLayer unscheduleAllSelectors];
+    
     switch (pauseLevel) {
         case 1:
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameScene sceneWithState:1]]];

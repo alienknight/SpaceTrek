@@ -213,7 +213,7 @@ int hudLevel;
         
         isShowingPausedMenu = true;
         PauseLayer *pauzy = [[PauseLayer alloc] initWithLevel: (int)(layer->getLevel)];
-        [self addChild:pauzy z:1 tag:PAUSE_LAYER_TAG];
+        [self addChild:pauzy z:10 tag:PAUSE_LAYER_TAG];
         [[CCDirector sharedDirector] pause];
         
     }

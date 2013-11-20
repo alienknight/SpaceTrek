@@ -583,7 +583,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     
     blackholeVector.push_back(blackholeBody);
     
-    b2Vec2 force = b2Vec2(-TRAVEL_SPEED*treasureSpeedMultiplier, 0);
+    b2Vec2 force = b2Vec2(-TRAVEL_SPEED*0.2, 0);
     blackholeBody->SetLinearVelocity(force);
     
     b2CircleShape circle;
@@ -595,7 +595,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     blackholeShapeDef.friction = 0.0f;
     blackholeShapeDef.restitution = 1.0f;
     blackholeShapeDef.filter.categoryBits = 0x2;
-    blackholeShapeDef.filter.maskBits = 0xFFFF-0x2;
+    blackholeShapeDef.filter.maskBits = 0;
     
     blackholeBody->CreateFixture(&blackholeShapeDef);
     
@@ -611,7 +611,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
         b2Vec2 blackholePos = b->GetPosition();
         b2Vec2 playerPos = player->playerBody->GetPosition();
                     
-        if (  sqrt( sqr(playerPos.x-blackholePos.x)+sqr(playerPos.y-blackholePos.y) ) < 20 )
+        if (  (gamePart1 || gamePart2) && sqrt( sqr(playerPos.x-blackholePos.x)+sqr(playerPos.y-blackholePos.y) ) < 20 )
         {
                 
             float delX = playerPos.x-blackholePos.x;
