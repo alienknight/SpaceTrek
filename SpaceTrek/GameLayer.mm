@@ -868,9 +868,9 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         if ( !gamePart1 ){
             return false;
         }
-        player.numOfAffordCollsion += 1;
-        numOfAffordCollsionTEMP++;
-        player.scale = 1.5;
+        player.numOfAffordCollsion += 2;
+        numOfAffordCollsionTEMP += 2;
+        [player shield2];
     }
     else if (propertyTag == TREASURE_PROPERTY_TYPE_2_TAG)
     {

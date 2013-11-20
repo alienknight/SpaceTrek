@@ -184,6 +184,53 @@
     [self runAction:[CCSequence actions:invincibleAction, playerRunAction, nil]];
 }
 
+-(void) noshield
+{
+    [self stopAllActions];
+    
+    NSMutableArray *runAnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [runAnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceship%d.png", i]]];
+    }
+    
+    playerRunAnimation = [CCAnimation animationWithSpriteFrames:runAnimFrames delay:0.09f];
+    playerRunAction = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: playerRunAnimation] times:2000];
+    
+    [self runAction:playerRunAction];
+}
+
+-(void) shield1
+{
+    [self stopAllActions];
+    NSMutableArray *shield1AnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [shield1AnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceship-shield-1-%d.png", i]]];
+    }
+    shield1Animation = [CCAnimation animationWithSpriteFrames:shield1AnimFrames delay:0.1f];
+    shield1Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: shield1Animation] times:2000];
+    
+    [self runAction:shield1Action];
+}
+
+-(void) shield2
+{
+    [self stopAllActions];
+    NSMutableArray *shield2AnimFrames = [NSMutableArray array];
+    for(int i = 1; i <= 2; ++i){
+        [shield2AnimFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:
+          [NSString stringWithFormat:@"spaceship-shield-2-%d.png", i]]];
+    }
+    shield2Animation = [CCAnimation animationWithSpriteFrames:shield2AnimFrames delay:0.1f];
+    shield2Action = [CCRepeat actionWithAction: [CCAnimate actionWithAnimation: shield2Animation] times:2000];
+    
+    [self runAction:shield2Action];
+}
+
 -(void) crashTransformActionFinished:(id)sender
 {
     CCScene* scene = [[CCDirector sharedDirector] runningScene];

@@ -41,11 +41,11 @@
                   symbolName = "-[Player collison]"
                   moduleName = "SpaceTrek"
                   urlString = "file:///Users/zhenli/Documents/Github/SpaceTrek/SpaceTrek/SpaceTrek/Player.h"
-                  timestampString = "406597366.505494"
+                  timestampString = "406604555.810067"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
                   offsetFromSymbolStart = "16">
                </Location>
                <Location
@@ -55,11 +55,11 @@
                   symbolName = "-[Player setCollison:]"
                   moduleName = "SpaceTrek"
                   urlString = "file:///Users/zhenli/Documents/Github/SpaceTrek/SpaceTrek/SpaceTrek/Player.h"
-                  timestampString = "406597366.505747"
+                  timestampString = "406604555.810484"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
