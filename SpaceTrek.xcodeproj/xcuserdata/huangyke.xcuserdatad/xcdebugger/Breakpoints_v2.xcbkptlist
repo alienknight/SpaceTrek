@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "841"
-            endingLineNumber = "841"
-            landmarkName = "-initBatchNode"
+            startingLineNumber = "970"
+            endingLineNumber = "970"
+            landmarkName = "-update:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -134,13 +134,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
-            landmarkName = "GetRandomGaussian( int lowerbound, int upperbound )"
-            landmarkType = "7">
+            startingLineNumber = "468"
+            endingLineNumber = "468"
+            landmarkName = "@implementation GameLayer"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -594,11 +594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
+            startingLineNumber = "808"
+            endingLineNumber = "808"
             landmarkName = "-addBeginStone:yy:"
             landmarkType = "5">
          </BreakpointContent>
@@ -658,11 +658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "545"
-            endingLineNumber = "545"
+            startingLineNumber = "677"
+            endingLineNumber = "677"
             landmarkName = "-addRowTreasure:index:location:"
             landmarkType = "5">
          </BreakpointContent>
@@ -770,11 +770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "926"
-            endingLineNumber = "926"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "-propertyListener:"
             landmarkType = "5">
          </BreakpointContent>
@@ -786,11 +786,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceTrek/GameLayer.mm"
-            timestampString = "406535440.170639"
+            timestampString = "406664888.787637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
+            startingLineNumber = "1053"
+            endingLineNumber = "1053"
             landmarkName = "-propertyListener:"
             landmarkType = "5">
          </BreakpointContent>

@@ -214,7 +214,7 @@ bool isSetPlayerVelocity_2;
                         [self setPlayerVelocity];
                     }
                     
-                    if ( gamePart2 ){
+                    if ( gamePart2 || gamePart1 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
                     continue;
@@ -913,6 +913,10 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
 -(void) endBullet:(ccTime)dt
 {
     isbullet_2 = false;
+}
+-(void) endCollectCirle:(ccTime)dt
+{
+    isCollectCircle_2 = false;
 }
 - (void) dealloc
 {

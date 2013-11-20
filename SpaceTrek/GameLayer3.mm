@@ -220,7 +220,7 @@ bool isSetPlayerVelocity_3;
                         [self setPlayerVelocity];
                     }
                     
-                    if ( gamePart2 ){
+                    if ( gamePart2 || gamePart1 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
                     continue;
@@ -567,7 +567,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     
     blackhole.position = ccp(winSize.width - blackhole.contentSize.width/2, blackholeStartY);
     
-    [self addChild:blackhole];
+    [self addChild:blackhole z:-1];
     
     b2BodyDef blackholeBodyDef;
     blackholeBodyDef.type = b2_dynamicBody;
@@ -614,9 +614,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
         if (  (gamePart1 || gamePart2) && sqrt( sqr(playerPos.x-blackholePos.x)+sqr(playerPos.y-blackholePos.y) ) < 20 )
         {
                 
-            float delX = playerPos.x-blackholePos.x;
             float delY = playerPos.y-blackholePos.y;
-            delX = -7*delX;
             delY = -7*delY;
             b2Vec2 force = b2Vec2(0, delY);
             player->playerBody->SetLinearVelocity(force);
@@ -994,6 +992,10 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
 -(void) endBullet:(ccTime)dt
 {
     isbullet_3 = false;
+}
+-(void) endCollectCirle:(ccTime)dt
+{
+    isCollectCircle_3 = false;
 }
 - (void) dealloc
 {

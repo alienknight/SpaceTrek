@@ -211,7 +211,7 @@ bool isSetPlayerVelocity;
                         [self setPlayerVelocity];
                     }
                     
-                    if ( gamePart2 ){
+                    if ( gamePart2 || gamePart1 ){
                         player->playerBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
                     }
                     continue;
@@ -457,7 +457,8 @@ bool isSetPlayerVelocity;
 
 
 -(void)gameLogic:(ccTime)dt {
-    [self addTreasure];
+    for (int i=arc4random()%2; i>=0; i--)
+        [self addTreasure];
 }
 -(void) gameStoneLogic:(ccTime)dt
 {
@@ -483,7 +484,134 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     GameObject *treasure;
     treasure = [[GameObject alloc] init];
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    int treasureIndex = arc4random()%8+1;
+    
+    
+    if(distance>=0 && distance<=400)
+    {
+        int treasureIndex = arc4random()%2;
+        if(treasureIndex==0)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_1.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:1];
+        }
+        else
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_4.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:1];
+        }
+    }
+    else if(distance>=400 && distance<=1200)
+    {
+        int treasureIndex = arc4random()%5;
+        if(treasureIndex == 0)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_1.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:1];
+        }
+        if(treasureIndex == 1)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_4.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:1];
+        }
+        if(treasureIndex == 2)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_3.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 3)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_7.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 4)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_8.png"]];
+            treasure.scale = 0.5;
+            [treasure setScore:-5];
+        }
+    }
+    else if(distance>=1200 && distance<=2400)
+    {
+        int treasureIndex = arc4random()%5;
+        if(treasureIndex == 0)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_3.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 1)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_7.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 2)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_5.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:10];
+        }
+        if(treasureIndex == 3)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_6.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:10];
+        }
+        if(treasureIndex == 4)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_8.png"]];
+            treasure.scale = 0.5;
+            [treasure setScore:-5];
+        }
+    }
+    else if(distance>=2400)
+    {
+        int treasureIndex = arc4random()%6;
+        if(treasureIndex == 0)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_3.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 1)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_7.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:5];
+        }
+        if(treasureIndex == 2)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_5.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:10];
+        }
+        if(treasureIndex == 3)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_6.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:10];
+        }
+        if(treasureIndex == 4)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_8.png"]];
+            treasure.scale = 0.5;
+            [treasure setScore:-5];
+        }
+        if(treasureIndex == 5)
+        {
+            treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_2.png"]];
+            treasure.scale = 1.5;
+            [treasure setScore:15];
+        }
+    }
+    
+    /*
     treasure = [GameObject spriteWithFile: [NSString stringWithFormat:@"treasure_type_%d.png", treasureIndex] ];
     if ( treasureIndex == 1 ){
         treasure.scale = 2;
@@ -496,6 +624,10 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         treasure.scale = 1.5;
         [treasure setScore:10];
     }
+    */
+    
+    
+    
     treasure.tag = TREASURE_TAG;
     [treasure setType:gameObjectTreasure1];
     int treasureStartY = GetRandom( treasure.contentSize.height/2, winSize.height - treasure.contentSize.height/2 );
@@ -757,9 +889,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     {
         [self pauseSchedulerAndActions];
         [player crashTransformAction];
-        
-//        b2Vec2 position1(winSize.width/5*4/PTM_RATIO, player.position.y/PTM_RATIO);
-//        player->playerBody->SetTransform(position1, 0.0);
         
         b2Vec2 force = b2Vec2(TRAVEL_SPEED, 0);
         player->playerBody->SetLinearVelocity(force);
