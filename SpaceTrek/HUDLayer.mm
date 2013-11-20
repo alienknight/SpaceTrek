@@ -212,7 +212,7 @@ int hudLevel;
         GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
         
         isShowingPausedMenu = true;
-        PauseLayer *pauzy = [[PauseLayer alloc] initWithLevel: layer->getLevel];
+        PauseLayer *pauzy = [[PauseLayer alloc] initWithLevel: (int)(layer->getLevel)];
         [self addChild:pauzy z:1 tag:PAUSE_LAYER_TAG];
         [[CCDirector sharedDirector] pause];
         

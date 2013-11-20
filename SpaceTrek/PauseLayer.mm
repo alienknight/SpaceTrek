@@ -18,8 +18,6 @@ int buttonSelected;
 
 @implementation PauseLayer
 
-int pauseLevel;
-
 
 - (id) initWithLevel:(int)level {
     if ((self = [super initWithColor:ccc4(139, 137, 137, 200)]))
@@ -64,7 +62,11 @@ int pauseLevel;
 
 -(void) restartButtonSelected
 {
-    [[GameScene sharedGameScene] setShowingPausedMenu:NO];
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:HUD_LAYER_TAG];
+    
+    [layer disablePauseMenu];
+    
     [[CCDirector sharedDirector] resume];
 
     switch (pauseLevel) {
@@ -78,6 +80,7 @@ int pauseLevel;
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameScene sceneWithState:3]]];
             break;
         default:
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameScene sceneWithState:3]]];
             break;
     }
     
@@ -85,7 +88,10 @@ int pauseLevel;
 }
 -(void) mainButtonSelected
 {
-    [[GameScene sharedGameScene] setShowingPausedMenu:NO];
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:HUD_LAYER_TAG];
+    
+    [layer disablePauseMenu];
     [[CCDirector sharedDirector] resume];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuScene scene]]];
 
