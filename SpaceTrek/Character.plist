@@ -290,10 +290,23 @@
                 <key>sourceSize</key>
                 <string>{300,200}</string>
             </dict>
+            <key>spaceship-shield-1-2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1154,1068},{252,178}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,11},{252,178}}</string>
+                <key>sourceSize</key>
+                <string>{300,200}</string>
+            </dict>
             <key>spaceship-shield-2-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1154,1068},{258,178}}</string>
+                <string>{{1408,1068},{258,178}}</string>
                 <key>offset</key>
                 <string>{-3,0}</string>
                 <key>rotated</key>
@@ -304,19 +317,6 @@
                 <string>{300,200}</string>
             </dict>
             <key>spaceship-shield-2-2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1414,1068},{252,178}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{24,11},{252,178}}</string>
-                <key>sourceSize</key>
-                <string>{300,200}</string>
-            </dict>
-            <key>spaceship-shiled-1-2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1668,1068},{252,178}}</string>
@@ -365,7 +365,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1113fed9d6a1ef821fb94597a35444ad$</string>
+            <string>$TexturePacker:SmartUpdate:32518c5ef03e37af0b11dbc175d6a135$</string>
             <key>textureFileName</key>
             <string>Character.png</string>
         </dict>

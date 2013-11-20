@@ -27,6 +27,10 @@
     CCAnimation *magnet2Animation;
     CCFiniteTimeAction *invincibleAction;
     CCAnimation *invincibleAnimation;
+    CCFiniteTimeAction *shield1Action;
+    CCAnimation *shield1Animation;
+    CCFiniteTimeAction *shield2Action;
+    CCAnimation *shield2Animation;
     
     BOOL collison;
     
@@ -39,6 +43,10 @@
 -(void) crashTransformAction;
 -(void) magnetAction;
 -(void) invincible;
+-(void) shield1;
+-(void) shield2;
+-(void) noshield;
+
 +(Player*) getPlayer;
 -(b2Body*) getBody;
 
