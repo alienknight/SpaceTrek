@@ -52,14 +52,14 @@ std::set<int> purcharsedProperty;
     property4 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected4)];
     property4.tag = STORE_PROPERTY_TYPE_4_TAG;
     
-    property5 = [CCMenuItemImage itemWithNormalImage:@"STORE_Bullet.png" selectedImage:@"STORE_Bullet.png" target:self selector:@selector(storePropertySelected5)];
+    property5 = [CCMenuItemImage itemWithNormalImage:@"STORE_Toucharea.png" selectedImage:@"STORE_Toucharea.png" target:self selector:@selector(storePropertySelected5)];
     property5.tag = STORE_PROPERTY_TYPE_5_TAG;
     
     PropertyMenu = [CCMenu menuWithItems:property1, property2, property3,property4,property5, nil];
     [PropertyMenu setAnchorPoint: ccp(0.0f, 1.0f)];
-    [PropertyMenu setPosition:ccp(504, 653)];
+    [PropertyMenu setPosition:ccp(714, 383)];
     
-    [PropertyMenu alignItemsHorizontallyWithPadding:45.0f];
+    [PropertyMenu alignItemsVerticallyWithPadding:35.0f];
     [self addChild:PropertyMenu z:3];
 }
 

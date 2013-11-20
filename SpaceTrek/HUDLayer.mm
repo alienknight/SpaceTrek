@@ -121,7 +121,7 @@ int hudLevel;
                 num++;
                 break;
             case 5:
-                property5 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Bullet.png" selectedImage:@"TOOLBAR_Bullet.png" target:self selector:@selector(propertySelected5)];
+                property5 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Toucharea.png" selectedImage:@"TOOLBAR_Toucharea.png" target:self selector:@selector(propertySelected5)];
                 property5.tag = TREASURE_PROPERTY_TYPE_5_TAG;
                 [PropertyMenu addChild:property5];
                 num++;
