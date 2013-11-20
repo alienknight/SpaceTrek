@@ -9,7 +9,6 @@
 
 #import "GameLayer3.h"
 #import "Constants.h"
-#import "PauseLayer.h"
 #import "GameScene.h"
 #import "HUDLayer.h"
 #import "GameOverScene.h"
@@ -33,6 +32,7 @@ bool isSetPlayerVelocity_3;
 -(id) init{
     self = [super init];
     if(self){
+        getLevel = 3;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
@@ -809,19 +809,6 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
     b2Vec2 force = b2Vec2(TRAVEL_SPEED, 0);
     player->playerBody->SetLinearVelocity(force);
     //    player->playerBody->ApplyLinearImpulse(force, player->playerBody->GetWorldCenter());
-}
-
-
-- (void)pauseButtonSelected {
-    //    [self zoomPause];
-    
-    if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
-        [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-        [[GameScene sharedGameScene] showPausedMenu:3];
-        [[CCDirector sharedDirector] pause];
-        
-    }
-    
 }
 
 - (void) initBatchNode {

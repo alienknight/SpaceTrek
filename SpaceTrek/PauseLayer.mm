@@ -55,9 +55,11 @@ int pauseLevel;
 
 -(void) resumeButtonSelected
 {
-    [[GameScene sharedGameScene] setShowingPausedMenu:NO];
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:HUD_LAYER_TAG];
+
+    [layer disablePauseMenu];
     [[CCDirector sharedDirector]resume];
-    [[GameScene sharedGameScene] removeChildByTag:PAUSE_LAYER_TAG cleanup:YES];
 }
 
 -(void) restartButtonSelected

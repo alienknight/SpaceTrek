@@ -62,6 +62,7 @@
     
 @public
     bool collision;
+    int getLevel;
 }
 
 -(void) playerBack;

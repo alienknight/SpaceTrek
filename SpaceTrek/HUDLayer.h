@@ -21,6 +21,8 @@
     CCMenu *pauseMenu;
     
     CCSprite * shadow;
+    
+    bool isShowingPausedMenu;
 }
 - (id) initWithLevel:(int)level;
 -(void) updateDistanceCounter:(int)amount;
@@ -28,5 +30,7 @@
 -(void) setShadowPosition:(int) x yy:(int) y;
 
 +(HUDLayer*) getHUDLayer;
+
+-(void) disablePauseMenu;
 
 @end

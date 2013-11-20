@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import <vector>
 #import "Global.h"
+#import "PauseLayer.h"
 
 @implementation HUDLayer
 
@@ -28,6 +29,8 @@ int hudLevel;
         statusBar= [CCSprite spriteWithFile:@"StatusBar.png"];
         statusBar.position = ccp(45, winSize.height/2);
         
+        isShowingPausedMenu = false;
+        
         distanceLabel = [CCLabelTTF labelWithString:@"0" fontName:@"arial" fontSize:35];
         distanceLabel.rotation = 90;
         [distanceLabel setColor:ccORANGE];
@@ -41,7 +44,7 @@ int hudLevel;
      
         switch (state) {
             case GAME_STATE_ONE:
-            
+                shadow = NULL;
             break;
             case GAME_STATE_TWO:
                 shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
@@ -50,10 +53,7 @@ int hudLevel;
                 [self addChild:shadow z:1];
             break;
             case GAME_STATE_THREE:
-                shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
-                [shadow setAnchorPoint: ccp(0,0.5)];
-                [shadow setPosition: ccp(0, winSize.height/2)];
-                [self addChild:shadow z:1];
+                shadow = NULL;
             break;
             default:
             break;
@@ -76,8 +76,10 @@ int hudLevel;
 }
 -(void) setShadowPosition: (int) x yy:(int) y
 {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    [shadow setPosition: ccp(0, y)];
+    if ( shadow!=NULL ){
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        [shadow setPosition: ccp(0, y)];
+    }
 }
 -(void) updateDistanceCounter:(int)amount
 {
@@ -205,9 +207,22 @@ int hudLevel;
 
 -(void) pauseButtonSelectedCur
 {
-    CCScene* scene = [[CCDirector sharedDirector] runningScene];
-    GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
-    [layer pauseButtonSelected];
+    if (!isShowingPausedMenu) {
+        CCScene* scene = [[CCDirector sharedDirector] runningScene];
+        GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+        
+        isShowingPausedMenu = true;
+        PauseLayer *pauzy = [[PauseLayer alloc] initWithLevel: layer->getLevel];
+        [self addChild:pauzy z:1 tag:PAUSE_LAYER_TAG];
+        [[CCDirector sharedDirector] pause];
+        
+    }
+}
+
+-(void) disablePauseMenu
+{
+    isShowingPausedMenu = false;
+    [self removeChildByTag:PAUSE_LAYER_TAG cleanup:YES];
 }
 
 @end

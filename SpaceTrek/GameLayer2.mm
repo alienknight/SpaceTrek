@@ -8,7 +8,6 @@
 
 #import "GameLayer2.h"
 #import "Constants.h"
-#import "PauseLayer.h"
 #import "GameScene.h"
 #import "HUDLayer.h"
 #import "GameOverScene.h"
@@ -37,6 +36,8 @@ bool isSetPlayerVelocity_2;
          bg.anchorPoint = ccp(0, 0);
          [self addChild: bg z:-10];
          */
+        getLevel = 2;
+        
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         collectedTreasure.clear();
@@ -726,17 +727,6 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
     b2Vec2 force = b2Vec2(TRAVEL_SPEED, 0);
     player->playerBody->SetLinearVelocity(force);
     //    player->playerBody->ApplyLinearImpulse(force, player->playerBody->GetWorldCenter());
-}
-- (void)pauseButtonSelected {
-    //    [self zoomPause];
-    
-    if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
-        [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-        [[GameScene sharedGameScene] showPausedMenu:2];
-        [[CCDirector sharedDirector] pause];
-        
-    }
-    
 }
 
 - (void) initBatchNode {

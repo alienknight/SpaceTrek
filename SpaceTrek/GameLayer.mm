@@ -8,7 +8,6 @@
 
 #import "GameLayer.h"
 #import "Constants.h"
-#import "PauseLayer.h"
 #import "GameScene.h"
 #import "HUDLayer.h"
 #import "GameOverScene.h"
@@ -37,6 +36,8 @@ bool isSetPlayerVelocity;
         bg.anchorPoint = ccp(0, 0);
         [self addChild: bg z:-10];
         */
+        getLevel = 1;
+        
         CGSize winSize = [[CCDirector sharedDirector] winSize];
 
         collectedTreasure.clear();
@@ -830,17 +831,6 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     obstacleBody->CreateFixture(&obstacleShapeDef);
 }
 
-
-- (void)pauseButtonSelected {
-    
-        if (![[GameScene sharedGameScene] isShowingPausedMenu]) {
-            [[GameScene sharedGameScene] setShowingPausedMenu:YES];
-            [[GameScene sharedGameScene] showPausedMenu:1];
-            [[CCDirector sharedDirector] pause];
-    
-        }
-    
-}
 
 - (void) initBatchNode {
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Character.plist"];
