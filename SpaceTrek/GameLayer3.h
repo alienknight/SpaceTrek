@@ -56,7 +56,7 @@
     
     SimpleAudioEngine * backgroundAmbience;
     
-    bool gamePart1, gamePart2;
+    bool gamePart1, gamePart2, during_invincible;
     
     ALuint firstBackgroundMusic;
     ALuint secondBackgroundMusic;

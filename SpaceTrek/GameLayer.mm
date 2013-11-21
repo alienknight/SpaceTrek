@@ -37,6 +37,7 @@ bool isSetPlayerVelocity;
         [self addChild: bg z:-10];
         */
         getLevel = 1;
+        during_invincible = false;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
 
@@ -91,6 +92,8 @@ bool isSetPlayerVelocity;
         
         hudLayer = nil;
         [self schedule:@selector(update:)];
+        
+        [self addObstacle];
         
     }
     return self;
@@ -267,6 +270,34 @@ bool isSetPlayerVelocity;
        
             
         }
+    }
+}
+
+-(void) setVolecity : (int)judge
+{
+    if(judge==0)
+    {
+        [self unschedule:@selector(gameLogic:)];
+        [self unschedule:@selector(addTreasure:)];
+        for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+            if (b->GetUserData() != NULL) {
+                GameObject* treasure = (GameObject*) b->GetUserData();
+                [treasure setV_X:b->GetLinearVelocity().x];
+                [treasure setV_Y:b->GetLinearVelocity().y];
+                b2Vec2 force = b2Vec2(0, 0);
+                b->SetLinearVelocity(force);
+            }
+        }
+    }
+    else{
+        for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+            if (b->GetUserData() != NULL) {
+                GameObject* treasure = (GameObject*) b->GetUserData();
+                b2Vec2 force = b2Vec2(treasure.v_X, treasure.v_Y);
+                b->SetLinearVelocity(force);
+            }
+        }
+        
     }
 }
 
@@ -953,9 +984,9 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     obstacleShapeDef.shape = &circle;
     obstacleShapeDef.density = 3.0f;
     obstacleShapeDef.friction = 0.0f;
-    obstacleShapeDef.restitution = 1.0f;
+    obstacleShapeDef.restitution = 0.0f;
     obstacleShapeDef.filter.categoryBits = 0x7;
-    obstacleShapeDef.filter.maskBits = 0xFFFF-0x2-0x3-0x5-0x6;
+    obstacleShapeDef.filter.maskBits = 0x1;
     
     obstacleBody->CreateFixture(&obstacleShapeDef);
 }
@@ -972,8 +1003,32 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
         CCScene* scene = [[CCDirector sharedDirector] runningScene];
         hudLayer = (HUDLayer*)[scene getChildByTag:HUD_LAYER_TAG];
     }
-    if(gamePart1)
-        distance += dt*100;
+    
+    if(gamePart1){
+        distance += dt*100*treasureSpeedMultiplier;
+        [hudLayer updatePointer: distance];
+        if ( distance >= MAX_DISTANCE ){
+            [self unschedule:@selector(gameLogic:)];
+            [self unschedule:@selector(endInvincible:)];
+            [self unschedule:@selector(SetUpMagnet:)];
+            [self unschedule:@selector(endMagnet:)];
+            [self unschedule:@selector(endBullet:)];
+            [self unschedule:@selector(endCollectCirle:)];
+            
+            if (during_invincible){
+                [self endInvincible:0];
+            }
+            
+            distance = MAX_DISTANCE-1;
+            [[SimpleAudioEngine sharedEngine]playEffect:@"CrashSong.mp3"];
+            
+            [self playerBack];
+            [self ChangeGoBackSound];
+            
+            [player setType:gameObjectCollector];
+        }
+    }
+
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
@@ -1022,6 +1077,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
                 }
             }
         }
+        during_invincible = true;
         [player invincible];
         [_scheduler resumeTarget:self];
         [self schedule:@selector(gameLogic:) interval:(1.0f/treasureSpeedMultiplier/2.0f)];
@@ -1090,6 +1146,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
 
 -(void) endInvincible:(ccTime)dt
 {
+    during_invincible = false;
     [self unschedule:@selector(endInvincible:)];
     [self unschedule:@selector(gameLogic:)];
     

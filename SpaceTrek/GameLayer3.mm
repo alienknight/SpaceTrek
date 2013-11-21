@@ -33,6 +33,7 @@ bool isSetPlayerVelocity_3;
     self = [super init];
     if(self){
         getLevel = 3;
+        during_invincible = false;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
@@ -820,8 +821,32 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
         CCScene* scene = [[CCDirector sharedDirector] runningScene];
         hudLayer = (HUDLayer*)[scene getChildByTag:HUD_LAYER_TAG];
     }
-    if(gamePart1)
-    distance += dt*100;
+    
+    if(gamePart1){
+        distance += dt*100*treasureSpeedMultiplier;
+        [hudLayer updatePointer: distance];
+        if ( distance >= MAX_DISTANCE ){
+            [self unschedule:@selector(gameLogic:)];
+            [self unschedule:@selector(endInvincible:)];
+            [self unschedule:@selector(SetUpMagnet:)];
+            [self unschedule:@selector(endMagnet:)];
+            [self unschedule:@selector(endBullet:)];
+            [self unschedule:@selector(endCollectCirle:)];
+            
+            if (during_invincible){
+                [self endInvincible:0];
+            }
+            
+            distance = MAX_DISTANCE-1;
+            [[SimpleAudioEngine sharedEngine]playEffect:@"CrashSong.mp3"];
+            
+            [self playerBack];
+            [self ChangeGoBackSound];
+            
+            [player setType:gameObjectCollector];
+        }
+    }
+
     [hudLayer updateDistanceCounter:distance];
     [self updateShip];
 }
@@ -858,6 +883,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
                 }
             }
         }
+        during_invincible = true;
         [player invincible];
         [_scheduler resumeTarget:self];
         [self schedule:@selector(gameLogic:) interval:(1.0f/treasureSpeedMultiplier/2.0f)];
@@ -925,6 +951,7 @@ int GetRandomGaussian_3( int lowerbound, int upperbound ){
 
 -(void) endInvincible:(ccTime)dt
 {
+    during_invincible = false;
     [self unschedule:@selector(endInvincible:)];
     [self unschedule:@selector(gameLogic:)];
     

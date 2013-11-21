@@ -24,10 +24,22 @@ int hudLevel;
 {
 	if ((self = [super init]))
 	{
+        shadow0= [CCSprite spriteWithFile:@"background-shadow-0.png"];
+        shadow1= [CCSprite spriteWithFile:@"background-shadow-1.png"];
+        shadow2= [CCSprite spriteWithFile:@"background-shadow-2.png"];
+        shadow4= [CCSprite spriteWithFile:@"background-shadow-4.png"];
+        
+        hudLevel = state;
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         self.tag=HUD_LAYER_TAG;
         statusBar= [CCSprite spriteWithFile:@"StatusBar.png"];
-        statusBar.position = ccp(45, winSize.height/2);
+        statusBar.position = ccp(90, winSize.height/2);
+        
+        pointer = [CCSprite spriteWithFile:@"pointer.png"];
+        [pointer setAnchorPoint:ccp(3.0/8.0, 0.5)];
+        pointer.position = ccp(100, winSize.height/5*4+40);
+        pointer.rotation = 90;
+        [statusBar addChild:pointer z:5];
         
         isShowingPausedMenu = false;
         
@@ -47,10 +59,10 @@ int hudLevel;
                 shadow = NULL;
             break;
             case GAME_STATE_TWO:
-                shadow= [CCSprite spriteWithFile:@"background-shadow.png"];
+                shadow= [CCSprite spriteWithFile:@"background-shadow-0.png"];
                 [shadow setAnchorPoint: ccp(0,0.5)];
                 [shadow setPosition: ccp(0, winSize.height/2)];
-                [self addChild:shadow z:1];
+                [self addChild:shadow z:1 tag:SHADOW_TAG];
             break;
             case GAME_STATE_THREE:
                 shadow = NULL;
@@ -77,9 +89,17 @@ int hudLevel;
 -(void) setShadowPosition: (int) x yy:(int) y
 {
     if ( shadow!=NULL ){
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
         [shadow setPosition: ccp(0, y)];
     }
+}
+-(void) setShadow: (int) index
+{
+    [self removeChildByTag:SHADOW_TAG];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    shadow= [CCSprite spriteWithFile:[NSString stringWithFormat:@"background-shadow-%d.png", index]];
+    [shadow setAnchorPoint: ccp(0,0.5)];
+    [shadow setPosition: ccp(0, winSize.height/2)];
+    [self addChild:shadow z:1 tag:SHADOW_TAG];
 }
 -(void) updateDistanceCounter:(int)amount
 {
@@ -94,6 +114,8 @@ int hudLevel;
     int num = 0;
     for (it=purcharsedProperty.begin(); it!=purcharsedProperty.end(); ++it)
     {
+        if(num>=5)
+            break;
         
         switch (*it) {
             case 1:
@@ -126,6 +148,14 @@ int hudLevel;
                 [PropertyMenu addChild:property5];
                 num++;
                 break;
+            case 6:
+                if(hudLevel!=2)
+                    break;
+                property6 = [CCMenuItemImage itemWithNormalImage:@"TOOLBAR_Toucharea.png" selectedImage:@"TOOLBAR_Toucharea.png" target:self selector:@selector(propertySelected6)];
+                property6.tag = TREASURE_PROPERTY_TYPE_6_TAG;
+                [PropertyMenu addChild:property6];
+                num++;
+                break;
             default:
                 break;
         }
@@ -142,7 +172,7 @@ int hudLevel;
     //[PropertyMenu setPosition:ccp(46, 443)];
     
     //[PropertyMenu setAnchorPoint: ccp(-10.0f, 10.0f)];
-    [PropertyMenu setPosition:ccp(46, 385)];
+    [PropertyMenu setPosition:ccp(37, 385)];
     
     [PropertyMenu alignItemsVerticallyWithPadding:8.5f];
     [self addChild:PropertyMenu z:3];
@@ -201,6 +231,16 @@ int hudLevel;
         purcharsedProperty.erase(5);
     }
 }
+-(void) propertySelected6
+{
+    CCScene* scene = [[CCDirector sharedDirector] runningScene];
+    GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+    bool used = [layer propertyListener:property6.tag];
+    if ( used ){
+        [PropertyMenu removeChild:property6];
+        purcharsedProperty.erase(6);
+    }
+}
 -(void) propertySelectedNull
 {
 }
@@ -223,6 +263,11 @@ int hudLevel;
 {
     isShowingPausedMenu = false;
     [self removeChildByTag:PAUSE_LAYER_TAG cleanup:YES];
+}
+
+-(void) updatePointer:(int)amount
+{
+    pointer.rotation = (amount/MAX_DISTANCE)*180-90;
 }
 
 @end

@@ -36,6 +36,7 @@
     
     int numOfAffordCollsion;
     int numOfCollsion;
+    
 }
 -(void) adjust;
 -(void) createBox2dObject:(b2World*)world;

@@ -37,6 +37,7 @@ bool isSetPlayerVelocity_2;
          [self addChild: bg z:-10];
          */
         getLevel = 2;
+        during_invincible = false;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
@@ -425,6 +426,11 @@ bool isSetPlayerVelocity_2;
 
 -(void) playerBack
 {
+    if ( hudLayer==nil ){
+        CCScene* scene = [[CCDirector sharedDirector] runningScene];
+        hudLayer = (HUDLayer*)[scene getChildByTag:HUD_LAYER_TAG];
+    }
+    [hudLayer setShadow:0];
     isPlayerMoveBack_2 = true;
     isStationMoveBack_2 = true;
     gamePart1 = false;
@@ -740,8 +746,37 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
         CCScene* scene = [[CCDirector sharedDirector] runningScene];
         hudLayer = (HUDLayer*)[scene getChildByTag:HUD_LAYER_TAG];
     }
-    if(gamePart1)
-    distance += dt*100;
+    
+    if(gamePart1){
+        distance += dt*100*treasureSpeedMultiplier;
+        [hudLayer updatePointer: distance];
+        if ( distance >= MAX_DISTANCE ){
+            [self unschedule:@selector(gameLogic:)];
+            [self unschedule:@selector(endInvincible:)];
+            [self unschedule:@selector(SetUpMagnet:)];
+            [self unschedule:@selector(endMagnet:)];
+            [self unschedule:@selector(endBullet:)];
+            [self unschedule:@selector(endCollectCirle:)];
+            
+            if (during_invincible){
+                [self endInvincible:0];
+            }
+            
+            distance = MAX_DISTANCE-1;
+            [[SimpleAudioEngine sharedEngine]playEffect:@"CrashSong.mp3"];
+            
+            [self playerBack];
+            [self ChangeGoBackSound];
+            
+            [player setType:gameObjectCollector];
+        }
+    }
+    /*
+    if(distance == 1000)
+        [hudLayer setShadow:1];
+    if(distance == 2000)
+        [hudLayer setShadow:2];
+     */
     [hudLayer updateDistanceCounter:distance];
     [self updateShip];
 }
@@ -778,6 +813,7 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
                 }
             }
         }
+        during_invincible = true;
         [player invincible];
         [_scheduler resumeTarget:self];
         [self schedule:@selector(gameLogic:) interval:(1.0f/treasureSpeedMultiplier/2.0f)];
@@ -806,6 +842,13 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
             return false;
         isCollectCircle_2 = true;
         [self schedule:@selector(endCollectCirle:) interval:15];
+    }
+    else if(propertyTag == TREASURE_PROPERTY_TYPE_6_TAG)
+    {
+        if(!gamePart1)
+            return false;
+        [hudLayer setShadow:4];
+        [self schedule:@selector(endLight:) interval:15];
     }
     return true;
 }
@@ -846,6 +889,7 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
 
 -(void) endInvincible:(ccTime)dt
 {
+    during_invincible = false;
     [self unschedule:@selector(endInvincible:)];
     [self unschedule:@selector(gameLogic:)];
     
@@ -917,6 +961,10 @@ int GetRandomGaussian_2( int lowerbound, int upperbound ){
 -(void) endCollectCirle:(ccTime)dt
 {
     isCollectCircle_2 = false;
+}
+-(void) endLight:(ccTime)dt
+{
+    [hudLayer setShadow:0];
 }
 - (void) dealloc
 {

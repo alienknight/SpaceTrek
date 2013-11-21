@@ -13,6 +13,8 @@
 
 @synthesize type;
 @synthesize score;
+@synthesize v_X;
+@synthesize v_Y;
 
 - (id)init
 {
@@ -20,6 +22,8 @@
     if (self) {
         type = gameObjectGeneral;
         score = 0;
+        v_X = 0;
+        v_Y = 0;
     }
     
     return self;

@@ -67,7 +67,7 @@
     playerShapeDef.shape = &circle;
     playerShapeDef.density = 1000.0f;
     playerShapeDef.friction = 0.5f;
-    playerShapeDef.restitution = 1.0f;
+    playerShapeDef.restitution = 0.0f;
     playerShapeDef.filter.categoryBits =  0x1;
     playerShapeDef.filter.maskBits =  0xFFFF;
     

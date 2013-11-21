@@ -79,7 +79,9 @@ void ContactListener::BeginContact(b2Contact *contact) {
             }
             else if(spriteB.type==gameObjectObstacle)
             {
-                
+                CCScene* scene = [[CCDirector sharedDirector] runningScene];
+                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+                [layer setVolecity:0];
             }
             
         }
@@ -105,7 +107,33 @@ void ContactListener::BeginContact(b2Contact *contact) {
 
 void ContactListener::EndContact(b2Contact *contact)
 {
-    
+    b2Body *bodyA = contact->GetFixtureA()->GetBody();
+    b2Body *bodyB = contact->GetFixtureB()->GetBody();
+    if (bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
+    {
+        GameObject *spriteA = (__bridge GameObject *) bodyA->GetUserData();
+        GameObject *spriteB = (__bridge GameObject *) bodyB->GetUserData();
+        
+        
+
+        if(spriteA.type>spriteB.type)
+        {
+            std::swap(spriteA, spriteB);
+        }
+        
+        if(spriteA.type==gameObjectPlayer)
+        {
+            
+            if(spriteB.type==gameObjectObstacle)
+            {
+                CCScene* scene = [[CCDirector sharedDirector] runningScene];
+                GameLayer* layer = (GameLayer*)[scene getChildByTag:GAME_LAYER_TAG];
+                [layer setVolecity:1];
+            }
+            
+        }
+       
+    }
 }
 void ContactListener::PreSolve(b2Contact *contact, const b2Manifold *oldManifold) {
 }

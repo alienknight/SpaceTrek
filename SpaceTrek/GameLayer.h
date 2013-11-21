@@ -53,7 +53,7 @@
     
     SimpleAudioEngine * backgroundAmbience;
     
-    bool gamePart1, gamePart2;
+    bool gamePart1, gamePart2, during_invincible;
     
     ALuint firstBackgroundMusic;
     ALuint secondBackgroundMusic;
@@ -70,6 +70,8 @@
 -(bool) propertyListener: (int)propertyTag;
 - (void) dealloc;
 -(void)setPlayerVelocity;
+-(void) setVolecity : (int)judge;
+
 
 @property  (nonatomic, readwrite) b2World* world;
 @property  (nonatomic, readwrite) int distance;
