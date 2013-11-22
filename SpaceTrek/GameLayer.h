@@ -60,6 +60,7 @@
     
     std::vector<b2Body*> collectedTreasure;
     
+    bool hitStop;
 @public
     bool collision;
     int getLevel;
@@ -75,6 +76,7 @@
 
 @property  (nonatomic, readwrite) b2World* world;
 @property  (nonatomic, readwrite) int distance;
+@property  (nonatomic, readwrite) int power;
 @property  (nonatomic, readwrite) int score;
 @property (nonatomic, readwrite) CCSpriteBatchNode* allBatchNode;
 @property  (nonatomic, readwrite) ALuint firstBackgroundMusic;

@@ -38,6 +38,7 @@ bool isSetPlayerVelocity;
         */
         getLevel = 1;
         during_invincible = false;
+        hitStop = false;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
 
@@ -58,6 +59,7 @@ bool isSetPlayerVelocity;
         
         
         self.distance = 0;
+        self.power = 0;
         self.score = 0;
         collision = false;
         
@@ -277,8 +279,7 @@ bool isSetPlayerVelocity;
 {
     if(judge==0)
     {
-        [self unschedule:@selector(gameLogic:)];
-        [self unschedule:@selector(addTreasure:)];
+        hitStop = true;
         for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
             if (b->GetUserData() != NULL) {
                 GameObject* treasure = (GameObject*) b->GetUserData();
@@ -290,6 +291,7 @@ bool isSetPlayerVelocity;
         }
     }
     else{
+        hitStop = false;
         for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
             if (b->GetUserData() != NULL) {
                 GameObject* treasure = (GameObject*) b->GetUserData();
@@ -658,6 +660,7 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     */
     
     
+    if ( !hitStop ){
     
     treasure.tag = TREASURE_TAG;
     [treasure setType:gameObjectTreasure1];
@@ -666,7 +669,8 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     
     treasure.position = ccp(winSize.width - treasure.contentSize.width/2, treasureStartY);
     
-    [self addChild:treasure];
+        [self addChild:treasure];
+    
     
     b2BodyDef treasureBodyDef;
     treasureBodyDef.type = b2_dynamicBody;
@@ -696,11 +700,13 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
    
     treasureBody->CreateFixture(&treasureShapeDef);
     
-
+    }
 }
 
 -(void)addRowTreasure:(int)num index:(int)treasureIndex location:(int)loc
 {
+    
+    if ( hitStop ) return;
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     
@@ -1005,9 +1011,11 @@ int GetRandomGaussian( int lowerbound, int upperbound ){
     }
     
     if(gamePart1){
-        distance += dt*100*treasureSpeedMultiplier;
-        [hudLayer updatePointer: distance];
-        if ( distance >= MAX_DISTANCE ){
+        if ( !hitStop )
+            distance += dt*100*treasureSpeedMultiplier;
+        self.power += dt*100*treasureSpeedMultiplier;
+        [hudLayer updatePointer: self.power];
+        if ( self.power >= MAX_DISTANCE ){
             [self unschedule:@selector(gameLogic:)];
             [self unschedule:@selector(endInvincible:)];
             [self unschedule:@selector(SetUpMagnet:)];
